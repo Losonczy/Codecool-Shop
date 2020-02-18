@@ -118,6 +118,9 @@ h1{
 .card-header{
     min-height: 140px;
 }
+.card img{
+    max-height: 300px;
+}
 .nav-link:hover{
     color:#0FB0BB;
 }

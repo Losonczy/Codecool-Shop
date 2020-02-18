@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8" />
-    <meta name="author" content="Codecool" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta charset="utf-8"/>
+    <meta name="author" content="Codecool"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
     <title>Codecool Shop</title>
 
@@ -14,11 +14,13 @@
 
     <!--Latest compiled and minified Popper -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"></script>
 
     <!-- Latest compiled and minified CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
@@ -27,7 +29,7 @@
     <script src="/static/js/main.js" defer></script>
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
 
-    <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
     <script src="/static/ApiCart.js" defer></script>
 </head>
 
@@ -43,16 +45,16 @@
         <ul class="list-unstyled components">
 
             <li>
-                <a class="category" >Blue</a>
+                <a class="category">Blue</a>
             </li>
             <li>
-                <a class="category" >Green</a>
+                <a class="category">Green</a>
             </li>
             <li>
-                <a class="category" >Pink</a>
+                <a class="category">Pink</a>
             </li>
             <li>
-                <a class="category" >Show All</a>
+                <a class="category">Show All</a>
             </li>
         </ul>
     </nav>
@@ -61,11 +63,13 @@
             <nav class="navbar navbar-expand-lg">
 
                 <button type="button" id="sidebarCollapse">
-
                     <span><img src="/static/img/hamburger.png" alt=""></span>
                 </button>
             </nav>
-            <h1>Cool Stones Webshop</h1><img src="/static/img/cart.svg" alt="">
+            <h1>Cool Stones Webshop</h1>
+            <img src="/static/img/cart.svg" alt="" data-toggle="modal" data-target="#exampleModal">
+
+
         </div>
 
 
@@ -100,12 +104,10 @@
     </div>
 
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        CART
-    </button>
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">

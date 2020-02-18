@@ -177,6 +177,10 @@ h1{
     padding-right: 20px;
     margin-left: auto;
     max-width: 90px;
+
+}
+.header img:hover{
+    cursor: pointer;
 }
 .navbar span{
     padding:0;

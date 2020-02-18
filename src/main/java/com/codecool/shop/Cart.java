@@ -17,4 +17,14 @@ public class Cart {
         productsInCart.remove(product);
     }
 
+    public List<Product> getProductsInCart() {
+        return productsInCart;
+    }
+
+    @Override
+    public String toString() {
+        return "Cart{" +
+                "productsInCart=" + productsInCart +
+                '}';
+    }
 }

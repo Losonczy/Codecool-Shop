@@ -40,11 +40,6 @@ public class Initializer implements ServletContextListener {
         ProductCategory white = new ProductCategory("White","Healing stones","The true type of healing stones");
         productCategoryDataStore.add(white);
 
-
-
-
-
-
         //setting up products and printing it
         productDataStore.add(new Product("Taconite",39,"USD","Good looking, makes your stronger and smarter.",blue,mineralMine));
         productDataStore.add(new Product(" Carnallite",49,"USD","You will be powered by the winds of magic.",blue,rockFactory));

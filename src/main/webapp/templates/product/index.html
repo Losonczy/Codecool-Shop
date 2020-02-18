@@ -24,6 +24,8 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <!-- End of Bootstrap components -->
+    <script src="/static/js/main.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
     <script src="/static/ApiCart.js" defer></script>
@@ -31,29 +33,66 @@
 
 <body>
 
-<div class="jumbotron text-center">
-    <h1>Codecool Shop</h1>
-</div>
+<div class="wrapper">
+    <!-- Sidebar -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h3>Categories</h3>
+        </div>
 
-<div class="container">
-    <div class="card">
-        <strong th:text="${category.name}">Category Title</strong>
-    </div>
+        <ul class="list-unstyled components">
 
-    <div id="products" class="row">
-        <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
-            <div class="card">
-                <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt="" />
-                <div class="card-header">
-                    <h4 class="card-title" th:text="${prod.name}">Product name</h4>
-                    <p class="card-text" th:text="${prod.description}">Product description... </p>
-                </div>
-                <div class="card-body">
-                    <div class="card-text">
-                        <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
-                    </div>
-                    <div class="card-text">
-                        <a class="btn btn-success" href="#">Add to cart</a>
+            <li>
+                <a class="category" >Blue</a>
+            </li>
+            <li>
+                <a class="category" >Green</a>
+            </li>
+            <li>
+                <a class="category" >Pink</a>
+            </li>
+            <li>
+                <a class="category" >Show All</a>
+            </li>
+        </ul>
+    </nav>
+    <div id="content">
+        <div class="header">
+            <nav class="navbar navbar-expand-lg">
+
+                <button type="button" id="sidebarCollapse">
+
+                    <span><img src="/static/img/hamburger.png" alt=""></span>
+                </button>
+            </nav>
+            <h1>Cool Stones Webshop</h1><img src="/static/img/cart.svg" alt="">
+        </div>
+
+
+        <div class="container-fluid">
+
+            <div class="main-wrapper">
+
+                <!--                CONTENT START-->
+                <div id="products" class="row">
+                    <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
+                        <div class="card" th:attr="data-label=${prod.getProductCategory().name}">
+                            <img src="http://placehold.it/300x300/000/fff"
+                                 th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt=""/>
+                            <div class="card-header">
+                                <strong th:text="${category.name}">Category Title</strong>
+                                <h4 class="card-title" th:text="${prod.name}">Product name</h4>
+                                <p class="card-text" th:text="${prod.description}">Product description... </p>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-text">
+                                    <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
+                                </div>
+                                <div class="card-text">
+                                    <a class="toggle-button" href="#">Add to cart</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -88,7 +127,14 @@
 
 </div>
 
-<div th:replace="footer.html :: copy"></div>
+<script>
+    $(document).ready(function () {
 
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+
+    });
+</script>
 </body>
 </html>

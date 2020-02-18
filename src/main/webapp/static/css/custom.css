@@ -1,5 +1,198 @@
+@import url('https://fonts.googleapis.com/css?family=Anton|Merriweather+Sans|Open+Sans|Oswald|Roboto&display=swap');
+body,html{
+    margin:0;
+    padding: 0;
+}
+
+li:hover{
+    cursor:pointer;
+}
+
 .glyphicon {
     margin-right:5px;
+}
+a:hover{
+    text-decoration: none;
+}
+.wrapper {
+    width:100vw;
+    display: flex;
+
+}
+
+#sidebar {
+    min-width: 300px;
+    max-width: 300px;
+    min-height: 100vh;
+}
+
+
+#sidebar.active {
+    margin-left: -300px;
+}
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+.dropdown-toggle::after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -300px;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+}
+#sidebar {
+    /* don't forget to add all the previously mentioned styles here too */
+    background: #404040;
+    color: #fff;
+    transition: all 0.3s;
+}
+
+#sidebar .sidebar-header {
+    padding: 20px;
+    background: #404040;
+    alignment: center;
+    color:#E9E861;
+}
+
+#sidebar ul.components {
+    padding: 20px 0;
+
+}
+
+#sidebar ul p {
+    color: #fff;
+    padding: 10px;
+}
+
+#sidebar ul li a {
+    color:#65C697;
+    padding: 20px;
+    font-size: 1.1em;
+    display: block;
+    text-decoration: none;
+}
+#sidebar ul li a:hover {
+    color: #0FB0BB;
+    background-color: #4a4a4a;
+
+}
+
+#sidebar ul li.active > a, a[aria-expanded="true"] {
+    color: #fff;
+    background: #404040;
+}
+#content{
+    width: 100vw;
+}
+ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background: #404040;
+}
+.jumbotron{
+    height: 40vh;
+    background-image: url("/static/img/background.png");
+    background-position: bottom;
+    background-size: cover;
+    margin-bottom:20px;
+    padding:0;
+    background-color: white;
+}
+
+
+h1{
+    font-family: 'Anton', sans-serif;
+    padding: 1vw 5vw;
+    color: #E9E861;
+}
+.nav-container{
+    background-color: #404040;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row;
+    align-items: center;
+}
+.container-fluid {
+    padding: 0;
+}
+.card{
+    margin-top:20px;
+
+}
+
+.card-hidden{
+    display:none;
+}
+.card-hidden img{
+    max-height: 300px;
+    min-width: 200px;
+}
+
+.card-header{
+    min-height: 140px;
+}
+.card img{
+
+    max-height: 300px;
+    min-width: 200px;
+}
+.nav-link:hover{
+    color:#0FB0BB;
+}
+.toggle-button{
+    background-color: #0fb0bb;
+    color: white;
+    border:none;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+.toggle-button:hover{
+    color:white;
+    cursor:pointer;
+    background-color: #65c697;
+}
+.navbar{
+    margin:0;
+    background-color: transparent;
+
+}
+.header{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,0.5);
+
+}
+.header img{
+    padding-right: 20px;
+    margin-left: auto;
+    max-width: 90px;
+}
+.navbar span{
+    padding:0;
+    justify-content: center;
+}
+
+.navbar span img{
+    margin: 0;
+    max-width: 70px;
+}
+.navbar button{
+    background-color: transparent;
+    border:none;
+}
+.navbar button:hover{
+    cursor:pointer;
 }
 .thumbnail
 {
@@ -59,4 +252,8 @@
 .list-group-item-text
 {
     margin: 0 0 11px;
+}
+.main-wrapper{
+    width: 70%;
+    margin: 30px auto;
 }

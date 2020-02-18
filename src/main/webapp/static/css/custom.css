@@ -4,6 +4,10 @@ body,html{
     padding: 0;
 }
 
+li:hover{
+    cursor:pointer;
+}
+
 .glyphicon {
     margin-right:5px;
 }
@@ -122,12 +126,24 @@ h1{
 }
 .card{
     margin-top:20px;
+
 }
+
+.card-hidden{
+    display:none;
+}
+.card-hidden img{
+    max-height: 300px;
+    min-width: 200px;
+}
+
 .card-header{
     min-height: 140px;
 }
 .card img{
+
     max-height: 300px;
+    min-width: 200px;
 }
 .nav-link:hover{
     color:#0FB0BB;

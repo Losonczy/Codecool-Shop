@@ -12,4 +12,9 @@ public class Cart {
     public void addProduct(Product product){
         productsInCart.add(product);
     }
+
+    public void removeProduct(Product product){
+        productsInCart.remove(product);
+    }
+
 }

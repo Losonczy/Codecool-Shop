@@ -1,12 +1,12 @@
 window.addEventListener('load', (event) => {
-    postData('/apiCart', { answer: 42 })
+    postData('/apiCart', { "name":"Amazon Fire","quantity":1})
         .then((data) => {
             console.log(data); // JSON data parsed by `response.json()` call
         });
 });
 
 // Example POST method implementation:
-async function postData(url, data = {}) {
+async function postData(url, data) {
     // Default options are marked with *
     const response = fetch(url, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.

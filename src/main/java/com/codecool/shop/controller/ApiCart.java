@@ -1,5 +1,6 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.Cart;
 import com.codecool.shop.CartItem;
 import com.google.gson.Gson;
 
@@ -17,10 +18,13 @@ public class ApiCart extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Cart cart=new Cart();
         String response=req.getReader().lines().collect(Collectors.joining());
         Gson gson = new Gson();
         CartItem cartItem = gson.fromJson(response, CartItem.class);
         System.out.println(cartItem);
+        cart.addProduct(cartItem);
+        System.out.println(cart.getProductsInCart());
     }
 
 }

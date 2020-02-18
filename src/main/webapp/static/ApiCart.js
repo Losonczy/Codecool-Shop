@@ -1,5 +1,5 @@
 window.addEventListener('load', (event) => {
-    postData('/apiCart', { "name":"Amazon Fire","quantity":1})
+    postData('/apiCart', { "name":"TestProduct","quantity":1,"price":123})
         .then((data) => {
             console.log(data); // JSON data parsed by `response.json()` call
         });

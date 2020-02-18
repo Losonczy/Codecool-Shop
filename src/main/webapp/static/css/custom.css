@@ -112,6 +112,9 @@ h1{
 .container-fluid {
     padding: 0;
 }
+.card{
+    margin-top:20px;
+}
 .card-header{
     min-height: 140px;
 }

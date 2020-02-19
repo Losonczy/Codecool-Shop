@@ -1,14 +1,30 @@
-let itemToCart=document.querySelectorAll(".toggle-button");
-for(let item of itemToCart){
+let itemToCart = document.querySelectorAll(".toggle-button");
+for (let item of itemToCart) {
     item.addEventListener('click', (event) => {
-        postData('/apiCart', {"id":item.id})
+        postData('/apiCart', {"id": item.id})
             .then((data) => {
                 console.log(data); // JSON data parsed by `response.json()` call
             });
     });
 }
 
+let cartButton = document.querySelector("#cart-button");
+cartButton.addEventListener('click', function () {
 
+    getData("/");
+
+});
+
+
+function getData(url) {
+
+    fetch(url, {
+        method: 'GET',
+        credentials: 'same-origin',
+
+    });
+
+}
 
 // Example POST method implementation:
 async function postData(url, data) {

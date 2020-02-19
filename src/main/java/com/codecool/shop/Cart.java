@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Cart {
     private List<Product> productsInCart= new ArrayList<>();
-
+    private static final Cart INSTANCE = new Cart();
 
     public void addProduct(Product product){
         productsInCart.add(product);
@@ -21,6 +21,9 @@ public class Cart {
         productsInCart.remove(product);
     }
 
+    public static Cart getInstance(){
+        return INSTANCE;
+    }
     @Override
     public String toString() {
         return "Cart{" +

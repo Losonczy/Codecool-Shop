@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @WebServlet(urlPatterns = {"/apiCart"})
 public class ApiCart extends HttpServlet {
 
-    private Cart cart=new Cart();
+     Cart cart= Cart.getInstance();
     private Gson gson = new Gson();
 
     @Override
@@ -29,6 +29,7 @@ public class ApiCart extends HttpServlet {
         CartItemId cartItemId = gson.fromJson(response, CartItemId.class);
         cart.addProduct(productDataStore.find(Integer.valueOf(cartItemId.getId())));
         System.out.println("ADD utan: "+cart.getAllProductsInCart());
+
     }
 
 

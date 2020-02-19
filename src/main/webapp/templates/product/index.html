@@ -67,7 +67,7 @@
                 </button>
             </nav>
             <h1>Cool Stones Webshop</h1>
-            <img src="/static/img/cart.svg" alt="" data-toggle="modal" data-target="#exampleModal">
+            <img id="cart-button" src="/static/img/cart.svg" alt="" data-toggle="modal" data-target="#exampleModal">
 
 
         </div>
@@ -116,8 +116,8 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <p th:text="${itemsInCart}">itemsInCart</p>
+                <div class="modal-body" th:each="item,iterStat : ${itemsInCart}">
+                    <p th:text="${item.name}">itemsInCart</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

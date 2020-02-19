@@ -8,6 +8,20 @@ for (let item of itemToCart) {
     });
 }
 
+function quantityCounter() {
+    $(document).ready(function () {
+        $('.count').prop('disabled', false);
+        $(document).on('click', '.plus', function () {
+            $('.count').val(parseInt($('.count').val()) + 1);
+            if ($('.count').val() == 11) {
+                $('.count').val(10);
+            }
+        });
+        $(document).on('click', '.minus', function () {
+            $('.count').val(parseInt($('.count').val()) - 1);
+            if ($('.count').val() == 0) {
+                $('.count').val(1);
+            }
 let cartButton = document.querySelector("#cart-button");
 cartButton.addEventListener('click', function () {
 
@@ -24,6 +38,9 @@ function getData(url) {
 
     });
 
+}
+        });
+    });
 }
 
 // Example POST method implementation:
@@ -45,5 +62,5 @@ async function postData(url, data) {
     return response; // parses JSON response into native JavaScript objects
 }
 
-
+quantityCounter();
 

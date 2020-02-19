@@ -1,4 +1,5 @@
 let itemToCart = document.querySelectorAll(".toggle-button");
+
 for (let item of itemToCart) {
     item.addEventListener('click', (event) => {
         postData('/apiCart', {"id": item.id})
@@ -22,25 +23,30 @@ function quantityCounter() {
             if ($('.count').val() == 0) {
                 $('.count').val(1);
             }
+        });
+    })
+}
 let cartButton = document.querySelector("#cart-button");
 cartButton.addEventListener('click', function () {
 
-    getData("/");
+    getData("/apiGetCartData");
 
 });
 
 
 function getData(url) {
 
-    fetch(url, {
-        method: 'GET',
-        credentials: 'same-origin',
+    fetch(url,{  // set the path; the method is GET by default, but can be modified with a second parameter
+    headers : {
+        'Content-Type': 'application/json',
+            'Accept': 'application/json'
+    }
+    })
+        .then((response) => response.json())  // parse JSON format into JS object
+        .then((data) => {
+            console.log(data);
+        })
 
-    });
-
-}
-        });
-    });
 }
 
 // Example POST method implementation:

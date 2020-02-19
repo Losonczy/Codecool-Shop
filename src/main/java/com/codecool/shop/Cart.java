@@ -24,10 +24,5 @@ public class Cart {
     public static Cart getInstance(){
         return INSTANCE;
     }
-    @Override
-    public String toString() {
-        return "Cart{" +
-                "productsInCart=" + productsInCart +
-                '}';
-    }
+
 }

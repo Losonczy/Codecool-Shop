@@ -21,10 +21,4 @@ public class Cart {
         productsInCart.remove(product);
     }
 
-    @Override
-    public String toString() {
-        return "Cart{" +
-                "productsInCart=" + productsInCart +
-                '}';
-    }
 }

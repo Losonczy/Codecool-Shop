@@ -1,4 +1,10 @@
 let itemToCart=document.querySelectorAll(".toggle-button");
+let cartPicture=document.querySelector("#modal-cart-image");
+
+cartPicture.addEventListener("click",(event)=>{
+    getData('/apiCart');
+});
+
 for(let item of itemToCart){
     item.addEventListener('click', (event) => {
         postData('/apiCart', {"id":item.id})
@@ -7,8 +13,6 @@ for(let item of itemToCart){
             });
     });
 }
-
-
 
 // Example POST method implementation:
 async function postData(url, data) {
@@ -28,6 +32,15 @@ async function postData(url, data) {
     });
     return response; // parses JSON response into native JavaScript objects
 }
+
+function getData(url) {
+    fetch(url)  // set the path; the method is GET by default, but can be modified with a second parameter
+        .then((response) => response.json())  // parse JSON format into JS object
+        .then((data) => {
+            console.log(data);
+        });
+}
+
 
 
 

@@ -1,7 +1,9 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.Cart;
-import com.codecool.shop.CartItem;
+import com.codecool.shop.CartItemId;
+import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
@@ -16,15 +18,18 @@ import java.util.stream.Collectors;
 @WebServlet(urlPatterns = {"/apiCart"})
 public class ApiCart extends HttpServlet {
 
+    private Cart cart=new Cart();
+    private Gson gson = new Gson();
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Cart cart=new Cart();
+
+        ProductDao productDataStore = ProductDaoMem.getInstance();
         String response=req.getReader().lines().collect(Collectors.joining());
-        Gson gson = new Gson();
-        CartItem cartItem = gson.fromJson(response, CartItem.class);
-        System.out.println(cartItem);
-        cart.addProduct(cartItem);
-        System.out.println(cart.getProductsInCart());
+        CartItemId cartItemId = gson.fromJson(response, CartItemId.class);
+        cart.addProduct(productDataStore.find(Integer.valueOf(cartItemId.getId())));
+        System.out.println("ADD utan: "+cart.getAllProductsInCart());
     }
+
 
 }

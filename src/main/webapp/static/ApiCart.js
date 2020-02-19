@@ -1,7 +1,7 @@
 let itemToCart=document.querySelectorAll(".toggle-button");
 for(let item of itemToCart){
     item.addEventListener('click', (event) => {
-        postData('/apiCart', {"name":item.id})
+        postData('/apiCart', {"id":item.id})
             .then((data) => {
                 console.log(data); // JSON data parsed by `response.json()` call
             });

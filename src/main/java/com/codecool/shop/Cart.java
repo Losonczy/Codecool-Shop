@@ -6,22 +6,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Cart {
-    private List<CartItem> productsInCart=new ArrayList<CartItem>();
+    private List<Product> productsInCart= new ArrayList<>();
 
 
-    public void addProduct(CartItem cartItem){
-        productsInCart.add(cartItem);
+    public void addProduct(Product product){
+        productsInCart.add(product);
     }
 
-    public List<CartItem> getProductsInCart() {
+    public List<Product> getAllProductsInCart() {
         return productsInCart;
     }
 
-    public void removeProduct(CartItem cartItem){
-        productsInCart.remove(cartItem);
+    public void removeProduct(Product product){
+        productsInCart.remove(product);
     }
 
-
-
-
+    @Override
+    public String toString() {
+        return "Cart{" +
+                "productsInCart=" + productsInCart +
+                '}';
+    }
 }

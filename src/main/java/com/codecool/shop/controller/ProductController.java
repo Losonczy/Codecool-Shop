@@ -49,7 +49,6 @@ public class ProductController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)throws ServletException, IOException{
         req.getReader().lines().collect(Collectors.joining());
 
-
     }
 
 

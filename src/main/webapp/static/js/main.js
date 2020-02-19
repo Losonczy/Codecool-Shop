@@ -14,12 +14,14 @@ function filter() {
     const filterButtons = document.querySelectorAll('.category');
     for (let i = 0; i < filterButtons.length; i++) {
         filterButtons[i].addEventListener('click', function () {
-            if (filterButtons[i].textContent === "Blue") {
-                hide("Blue")
-            } else if (filterButtons[i].textContent === "Green") {
-                hide("Green")
-            } else if (filterButtons[i].textContent === "Pink") {
-                hide("Pink")
+            if (filterButtons[i].textContent === "Animal") {
+                hide("Animal")
+            } else if (filterButtons[i].textContent === "Holiday") {
+                hide("Holiday")
+            } else if (filterButtons[i].textContent === "Cartoon") {
+                hide("Cartoon")
+            } else if (filterButtons[i].textContent === "Other") {
+                hide("Other")
             }else{
                 hide("All")
             }

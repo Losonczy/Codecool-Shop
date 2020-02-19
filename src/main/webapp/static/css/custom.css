@@ -18,7 +18,7 @@ a:hover {
 }
 
 .wrapper {
-    width: 100vw;
+    /*width: 100vw;*/
     display: flex;
 
 }
@@ -121,8 +121,8 @@ ul ul a {
 
 
 h1 {
-    font-family: 'Anton', sans-serif;
-    padding: 1vw 5vw;
+    font-family: 'Oswald', sans-serif;
+    padding: 1vw;
     color: #E9E861;
 }
 

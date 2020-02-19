@@ -10,7 +10,7 @@ for (let item of itemToCart) {
 
 function quantityCounter() {
     $(document).ready(function () {
-        $('.count').prop('disabled', true);
+        $('.count').prop('disabled', false);
         $(document).on('click', '.plus', function () {
             $('.count').val(parseInt($('.count').val()) + 1);
         });

@@ -1,14 +1,27 @@
-let itemToCart=document.querySelectorAll(".toggle-button");
-for(let item of itemToCart){
+let itemToCart = document.querySelectorAll(".toggle-button");
+for (let item of itemToCart) {
     item.addEventListener('click', (event) => {
-        postData('/apiCart', {"id":item.id})
+        postData('/apiCart', {"id": item.id})
             .then((data) => {
                 console.log(data); // JSON data parsed by `response.json()` call
             });
     });
 }
 
-
+function quantityCounter() {
+    $(document).ready(function () {
+        $('.count').prop('disabled', true);
+        $(document).on('click', '.plus', function () {
+            $('.count').val(parseInt($('.count').val()) + 1);
+        });
+        $(document).on('click', '.minus', function () {
+            $('.count').val(parseInt($('.count').val()) - 1);
+            if ($('.count').val() == 0) {
+                $('.count').val(1);
+            }
+        });
+    });
+}
 
 // Example POST method implementation:
 async function postData(url, data) {
@@ -29,5 +42,5 @@ async function postData(url, data) {
     return response; // parses JSON response into native JavaScript objects
 }
 
-
+quantityCounter();
 

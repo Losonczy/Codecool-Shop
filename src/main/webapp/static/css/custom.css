@@ -139,6 +139,7 @@ h1 {
 }
 
 .card {
+    max-width: 340px;
     margin-top: 20px;
 
 }

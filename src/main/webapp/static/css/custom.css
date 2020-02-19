@@ -142,10 +142,13 @@ h1 {
     margin-top: 20px;
 
 }
-.focus{
-   font-weight: bolder;
-    background-color: #4a4a4a;
+
+.focus {
+    font-weight: bolder;
+    background-color: #272727;
+
 }
+
 .card-hidden {
     display: none;
 }

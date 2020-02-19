@@ -17,7 +17,7 @@ function filter() {
     for (let i = 0; i < filterButtons.length; i++) {
         filterButtons[i].addEventListener('click', function () {
             let focusSwitch = filterButtons[i].getAttribute("data-switch");
-            setFocus(this);
+            setFocus(this,focusSwitch);
             if(focusSwitch == "1"){
                 filterButtons[i].setAttribute('data-switch', "2");
             }else{
@@ -67,10 +67,16 @@ function show(card) {
     card.parentElement.setAttribute('class', 'col col-sm-12 col-md-6 col-lg-4');
 }
 
-function setFocus(button){
+function setFocus(button,focusSwitch) {
     let current = document.getElementsByClassName('focus');
     current[0].className = current[0].className.replace(" focus", "");
     button.className += " focus";
+    if (focusSwitch == "2") {
+        let defaultFilter = document.getElementById('default');
+        current[0].className = current[0].className.replace(" focus", "");
+        defaultFilter.className += " focus";
+
+    }
 }
 
 filter();

@@ -1,9 +1,14 @@
-window.addEventListener('load', (event) => {
-    postData('/apiCart', { "name":"TestProduct","quantity":1,"price":123})
-        .then((data) => {
-            console.log(data); // JSON data parsed by `response.json()` call
-        });
-});
+let itemToCart=document.querySelectorAll(".toggle-button");
+for(let item of itemToCart){
+    item.addEventListener('click', (event) => {
+        postData('/apiCart', {"name":item.id})
+            .then((data) => {
+                console.log(data); // JSON data parsed by `response.json()` call
+            });
+    });
+}
+
+
 
 // Example POST method implementation:
 async function postData(url, data) {

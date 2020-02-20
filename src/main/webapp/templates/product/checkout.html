@@ -73,7 +73,7 @@
                                     <i class="fa fa-cc-visa" style="color:navy;"></i>
                                     <i class="fa fa-cc-amex" style="color:blue;"></i>
                                     <i class="fa fa-cc-mastercard" style="color:red;"></i>
-                                    <i class="fa fa-cc-discover" style="color:orange;"></i>
+                                    <i class="fa fa-cc-paypal" style="color:orange;"></i>
                                 </div>
                                 <label for="cname">Name on Card</label>
                                 <input type="text" id="cname" name="cardname" placeholder="John More Doe">
@@ -126,21 +126,21 @@
                 <div class="container">
                     <h4>Cart
                         <span class="price" style="color:black">
-          <i class="fa fa-shopping-cart"></i>
-          <b>4</b>
+          <i class="fa fa-shopping-cart" th:text="'     '+${quantityOfItems}"></i>
         </span>
                     </h4>
                     <div id="itemsInCart" class="row">
                         <div th:each="prod,iterStat : ${itemsInCart}">
                             <div class="items" th:attr="data-label=${prod.getName()}">
                                 <p><img src="http://placehold.it/300x300/000/fff"
-                                     th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt=""
-                                            style="width: 40%"/>Quantity</p>
+                                        th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt=""
+                                        style="width: 40%"/>
+                                </p>
                             </div>
                         </div>
                     </div>
-                    <hr>
-                    <p>Total <span class="price" style="color:black"><b>$30</b></span></p>
+                    <hr
+                    <p>Total <span class="price" style="color:black" th:text="${costOfCart}+' $'"></span></p>
                 </div>
             </div>
         </div>

@@ -52,15 +52,19 @@ function loadCartData(cartItems) {
 function displayCartData(item) {
     const emptyP = document.querySelector('#empty');
     const body = document.querySelector('#container');
+    const header = document.querySelector('.row-header');
 
     const template = document.querySelector('#cart-template');
     const clone = document.importNode(template.content, true);
 
     const name = clone.querySelector('#name');
     const price = clone.querySelector('#price');
+    const counter = clone.querySelector('.count');
 
     emptyP.textContent = "";
+    header.style.display = "block";
     name.textContent = item["name"];
+    counter.setAttribute('value',`${item['amount']}`);
     price.textContent = item["defaultPrice"] + " USD";
     body.appendChild(clone);
 

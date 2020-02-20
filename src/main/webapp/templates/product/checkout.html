@@ -132,10 +132,10 @@
                     <div id="itemsInCart" class="row">
                         <div th:each="prod,iterStat : ${itemsInCart.keySet()}">
                             <div class="items" th:attr="data-label=${prod.getName()}">
-                                <p><img src="http://placehold.it/300x300/000/fff"
+                                <p><div th:text="'Quantity:    '+${itemsInCart.get(prod)}"></div>
+                                    <img src="http://placehold.it/300x300/000/fff"
                                         th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt=""
                                         style="width: 40%"/>
-                                <div th:text="${itemsInCart.get(prod)}"></div>
                                 </p>
                             </div>
                         </div>

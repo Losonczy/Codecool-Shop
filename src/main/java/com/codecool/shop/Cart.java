@@ -35,6 +35,25 @@ public class Cart {
         return countedProducts;
     }
 
+    public int getCostOfCart(){
+        HashMap<Product,Integer> countedProducts=getCountedProduct();
+        int sum=0;
+        for(Product product:countedProducts.keySet()){
+                sum+=(product.getDefaultPrice()*countedProducts.get(product));
+        }
+        return sum;
+    }
+    public int getCountOfCart(){
+        HashMap<Product,Integer> countedProducts=getCountedProduct();
+        int count=0;
+        for(Product product:countedProducts.keySet()){
+                count+=(countedProducts.get(product));
+        }
+        return count;
+    }
+
+
+
     public static Cart getInstance(){
         return INSTANCE;
     }

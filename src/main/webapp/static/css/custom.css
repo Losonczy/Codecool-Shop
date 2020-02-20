@@ -293,13 +293,16 @@ h1 {
     margin: 30px auto;
 }
 
+.qty{
+    margin:0;
+}
 .qty .count {
     color: #000;
     display: inline-block;
     vertical-align: top;
     font-size: 25px;
     font-weight: 700;
-    line-height: 30px;
+    line-height: 25px;
     padding: 0 2px;
     min-width: 35px;
     text-align: center;
@@ -310,9 +313,9 @@ h1 {
     display: inline-block;
     vertical-align: top;
     color: white;
-    width: 30px;
-    height: 30px;
-    font: 30px/1 Arial, sans-serif;
+    width: 25px;
+    height: 25px;
+    font: 25px/1 Arial, sans-serif;
     text-align: center;
     border-radius: 50%;
 }
@@ -322,14 +325,16 @@ h1 {
     display: inline-block;
     vertical-align: top;
     color: white;
-    width: 30px;
-    height: 30px;
-    font: 30px/1 Arial, sans-serif;
+    width: 25px;
+    height: 25px;
+    font: 25px/1 Arial, sans-serif;
     text-align: center;
     border-radius: 50%;
     background-clip: padding-box;
 }
-
+.mt-5{
+    margin: 2px !important;
+}
 div {
     text-align: center;
 }

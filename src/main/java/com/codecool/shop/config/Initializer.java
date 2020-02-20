@@ -41,15 +41,15 @@ public class Initializer implements ServletContextListener {
         productCategoryDataStore.add(simple);
 
         //setting up products and printing it
-        productDataStore.add(new Product("Taconite",39,"USD","Good looking, makes your stronger and smarter.",animal,mineralMine));
-        productDataStore.add(new Product(" Carnallite",49,"USD","You will be powered by the winds of magic.",animal,rockFactory));
-        productDataStore.add(new Product("Moolooite",35,"USD","ALso known as 'salt rock', makes your dish tasty.",animal,mineralMine));
-        productDataStore.add(new Product(" Arsenolite",69,"USD","Get's you out any rough situation.",other,rockFactory));
-        productDataStore.add(new Product("Fornacite",59,"USD","It's useless, but beautiful!",holiday,mineralMine));
-        productDataStore.add(new Product("Dickite",64,"USD","It helps you in bed and everywhere where you need it!",holiday,rockFactory));
-        productDataStore.add(new Product("Fukalite",999,"USD","Makes rich people a little bit less richer",animal,mineralMine));
-        productDataStore.add(new Product("Goosecreekite",39,"USD","A pink rock with green crystals, you need more?!",cartoon,rockFactory));
-        productDataStore.add(new Product("Cummingtonite",29,"USD","No one knows what it is good for, but looks cool.",cartoon,mineralMine));
+        productDataStore.add(new Product("Taconite",39,"USD","Good looking, makes your stronger and smarter.",animal,mineralMine,4));
+        productDataStore.add(new Product(" Carnallite",49,"USD","You will be powered by the winds of magic.",animal,rockFactory,6));
+        productDataStore.add(new Product("Moolooite",35,"USD","ALso known as 'salt rock', makes your dish tasty.",animal,mineralMine,10));
+        productDataStore.add(new Product(" Arsenolite",69,"USD","Get's you out any rough situation.",other,rockFactory,9));
+        productDataStore.add(new Product("Fornacite",59,"USD","It's useless, but beautiful!",holiday,mineralMine,8));
+        productDataStore.add(new Product("Dickite",64,"USD","It helps you in bed and everywhere where you need it!",holiday,rockFactory,7));
+        productDataStore.add(new Product("Fukalite",999,"USD","Makes rich people a little bit less richer",animal,mineralMine,5));
+        productDataStore.add(new Product("Goosecreekite",39,"USD","A pink rock with green crystals, you need more?!",cartoon,rockFactory,2));
+        productDataStore.add(new Product("Cummingtonite",29,"USD","No one knows what it is good for, but looks cool.",cartoon,mineralMine,2));
         /*productDataStore.add(new Product("Dragon shard",49,"USD","Rocks + dragon breath = Dragon shard.",blue,rockFactory));
         productDataStore.add(new Product("Analcime",53,"USD","Helps you get your loved one.",pink,mineralMine));
         productDataStore.add(new Product("Shattuckite",39,"USD","You can breath underwater with this rock...Or not.",blue,rockFactory));

@@ -8,6 +8,7 @@ public class BaseModel {
     protected int id;
     protected String name;
     protected String description;
+    protected int amount;
 
     public BaseModel(String name) {
         this.name = name;
@@ -61,4 +62,11 @@ public class BaseModel {
         return sb.toString();
     }
 
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
 }

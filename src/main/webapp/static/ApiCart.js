@@ -1,12 +1,14 @@
-let itemToCart = document.querySelectorAll(".toggle-button");
+function addItemToCart() {
+    let itemToCart = document.querySelectorAll(".toggle-button");
+    for (let item of itemToCart) {
+        item.addEventListener('click', (event) => {
+            postData('/apiCart', {"id": item.id})
+                .then((data) => {
+                    console.log(data); // JSON data parsed by `response.json()` call
+                });
 
-for (let item of itemToCart) {
-    item.addEventListener('click', (event) => {
-        postData('/apiCart', {"id": item.id})
-            .then((data) => {
-                console.log(data); // JSON data parsed by `response.json()` call
-            });
-    });
+        });
+    }
 }
 
 function quantityCounter() {
@@ -26,47 +28,77 @@ function quantityCounter() {
         });
     })
 }
-let cartButton = document.querySelector("#cart-button");
-cartButton.addEventListener('click', function () {
 
-    getData("/apiGetCartData");
+function getCartItems() {
+    let cartButton = document.querySelector("#cart-button");
+    cartButton.addEventListener('click', function () {
 
-});
-
-
-function getData(url) {
-
-    fetch(url,{  // set the path; the method is GET by default, but can be modified with a second parameter
-    headers : {
-        'Content-Type': 'application/json',
-            'Accept': 'application/json'
-    }
-    })
-        .then((response) => response.json())  // parse JSON format into JS object
-        .then((data) => {
-            console.log(data);
-        })
-
+        getData("/apiGetCartData", loadCartData);
+    });
 }
 
-// Example POST method implementation:
+function getData(url, callback) {
+
+    fetch(url, {  // set the path; the method is GET by default, but can be modified with a second parameter
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+    })
+        .then(response => response.json())  // parse JSON format into JS object
+        .then(data => callback(data))
+}
+
+function loadCartData(cartItems) {
+
+    for (let item of cartItems) {
+        displayCartData(item)
+    }
+}
+
+function displayCartData(item) {
+    const body = document.querySelector('#container');
+    const emptyP = document.querySelector('#empty');
+    const template = document.querySelector('#cart-template');
+    const clone = document.importNode(template.content, true);
+
+    const name = clone.querySelector('#name');
+    const existingNames = document.querySelectorAll('#name');
+    const quantity = clone.querySelector('#quantity');
+    const existingQuantity = document.querySelector('#quantity');
+    const price = clone.querySelector('#price');
+    const existingPrice = document.querySelector('#price');
+
+
+    name.textContent = item["name"];
+    quantity.setAttribute('value', `${item["amount"]}`);
+    price.textContent = item["defaultPrice"];
+    emptyP.textContent = "";
+
+
+    body.appendChild(clone);
+}
+
+
 async function postData(url, data) {
-    // Default options are marked with *
+
     const response = fetch(url, {
-        method: 'POST', // *GET, POST, PUT, DELETE, etc.
-        mode: 'cors', // no-cors, *cors, same-origin
-        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: 'same-origin', // include, *same-origin, omit
+        method: 'POST',
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
         headers: {
             'Content-Type': 'application/json'
-            // 'Content-Type': 'application/x-www-form-urlencoded',
+
         },
-        redirect: 'follow', // manual, *follow, error
-        referrerPolicy: 'no-referrer', // no-referrer, *client
-        body: JSON.stringify(data) // body data type must match "Content-Type" header
+        redirect: 'follow', //
+        referrerPolicy: 'no-referrer',
+        body: JSON.stringify(data)
     });
-    return response; // parses JSON response into native JavaScript objects
+    return response;
 }
 
+addItemToCart();
+getCartItems();
 quantityCounter();
 

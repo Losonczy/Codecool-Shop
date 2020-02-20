@@ -10,13 +10,7 @@ for (let item of itemToCart) {
             });
     });
     item.addEventListener('click', (event) => {
-        let x = document.getElementById("snackbar");
-
-        // Add the "show" class to DIV
-        x.className = "show";
-
-        // After 3 seconds, remove the show class from DIV
-        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+        snackBaring();
     })
 }
 
@@ -67,8 +61,6 @@ function loadCartData(cartItems) {
         console.log(cartCounter);
         displayCartData(cartItems[i])
     }
-
-
 }
 
 function displayCartData(item) {
@@ -113,6 +105,6 @@ async function postData(url, data) {
 
 addItemToCart();
 getCartItems();
-snackBaring();
+
 
 

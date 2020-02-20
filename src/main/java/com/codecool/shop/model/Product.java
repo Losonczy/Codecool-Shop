@@ -9,11 +9,14 @@ public class Product extends BaseModel {
     transient private ProductCategory productCategory;
     transient private Supplier supplier;
 
+
+
     public Product(String name, float defaultPrice, String currencyString, String description, ProductCategory productCategory, Supplier supplier) {
         super(name, description);
         this.setPrice(defaultPrice, currencyString);
         this.setSupplier(supplier);
         this.setProductCategory(productCategory);
+
     }
 
     public float getDefaultPrice() {

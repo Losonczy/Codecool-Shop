@@ -20,6 +20,7 @@ for (let item of itemToCart) {
     })
 }
 
+}
 function snackBaring() {
     // Get the snackbar DIV
     let x = document.getElementById("snackbar");
@@ -31,11 +32,6 @@ function snackBaring() {
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 }
 
-
-        });
-    }
-}
-
 function getCartItems() {
     let cartButton = document.querySelector("#cart-button");
 
@@ -45,6 +41,9 @@ function getCartItems() {
 
     });
 }
+
+
+
 
 function getData(url, callback) {
 

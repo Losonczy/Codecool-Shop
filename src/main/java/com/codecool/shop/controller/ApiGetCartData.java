@@ -24,7 +24,7 @@ public class ApiGetCartData extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String response = gson.toJson(cart.getAllProductsInCart());
-        System.out.println(cart.getAllProductsInCart());
+
         PrintWriter out = resp.getWriter();
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");

@@ -123,21 +123,6 @@
                     <div id="cart-body">
                         <div id="container">
                             <p id="empty">The cart is empty</p>
-                            <template id="cart-template">
-                                <div class="row">
-                                    <div class="col-sm" id="name">
-                                    </div>
-                                    <div class="col-sm" id="quantity">
-                                        <div class="qty mt-5">
-                                            <span class="minus bg-dark">-</span>
-                                            <input type="number" class="count" name="qty" value="1">
-                                            <span class="plus bg-dark">+</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm" id="price">
-                                    </div>
-                                </div>
-                            </template>
                         </div>
 
                     </div>
@@ -150,7 +135,21 @@
     </div>
 
 </div>
+<template id="cart-template">
+    <div class="row cart-row">
+        <div class="col-sm" id="name">
+        </div>
+<!--        <div class="col-sm" id="quantity">-->
+<!--            <div class="qty mt-5">-->
+<!--                <span class="minus bg-dark">-</span>-->
+<!--                <input type="number" class="count" name="qty" value="1">-->
+<!--                <span class="plus bg-dark">+</span>-->
+<!--            </div>-->
 
+        <div class="col-sm" id="price">
+        </div>
+    </div>
+</template>
 <script>
     $(document).ready(function () {
 

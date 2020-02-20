@@ -1,39 +1,27 @@
+let cartCounter = 0;
 function addItemToCart() {
     let itemToCart = document.querySelectorAll(".toggle-button");
+
     for (let item of itemToCart) {
         item.addEventListener('click', (event) => {
+
             postData('/apiCart', {"id": item.id})
                 .then((data) => {
                     console.log(data); // JSON data parsed by `response.json()` call
                 });
 
+
         });
     }
 }
 
-function quantityCounter() {
-    $(document).ready(function () {
-        $('.count').prop('disabled', false);
-        $(document).on('click', '.plus', function () {
-            $('.count').val(parseInt($('.count').val()) + 1);
-            if ($('.count').val() == 11) {
-                $('.count').val(10);
-            }
-        });
-        $(document).on('click', '.minus', function () {
-            $('.count').val(parseInt($('.count').val()) - 1);
-            if ($('.count').val() == 0) {
-                $('.count').val(1);
-            }
-        });
-    })
-}
-
 function getCartItems() {
     let cartButton = document.querySelector("#cart-button");
+
     cartButton.addEventListener('click', function () {
 
         getData("/apiGetCartData", loadCartData);
+
     });
 }
 
@@ -51,32 +39,31 @@ function getData(url, callback) {
 
 function loadCartData(cartItems) {
 
-    for (let item of cartItems) {
-        displayCartData(item)
+
+    for(let i=cartCounter; i<cartItems.length; i++){
+        cartCounter ++;
+        console.log(cartCounter);
+        displayCartData(cartItems[i])
     }
+
+
 }
 
 function displayCartData(item) {
-    const body = document.querySelector('#container');
     const emptyP = document.querySelector('#empty');
+    const body = document.querySelector('#container');
+
     const template = document.querySelector('#cart-template');
     const clone = document.importNode(template.content, true);
 
     const name = clone.querySelector('#name');
-    const existingNames = document.querySelectorAll('#name');
-    const quantity = clone.querySelector('#quantity');
-    const existingQuantity = document.querySelector('#quantity');
     const price = clone.querySelector('#price');
-    const existingPrice = document.querySelector('#price');
 
-
-    name.textContent = item["name"];
-    quantity.setAttribute('value', `${item["amount"]}`);
-    price.textContent = item["defaultPrice"];
     emptyP.textContent = "";
-
-
+    name.textContent = item["name"];
+    price.textContent = item["defaultPrice"] + " USD";
     body.appendChild(clone);
+
 }
 
 
@@ -100,5 +87,5 @@ async function postData(url, data) {
 
 addItemToCart();
 getCartItems();
-quantityCounter();
+
 

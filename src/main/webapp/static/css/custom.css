@@ -134,10 +134,60 @@ h1 {
     align-items: center;
 }
 
+.modal-dialog{
+    font-size: 20px;
+    min-width: 40%;
+    padding: 20px;
+    border-radius: 0;
+}
+
+.modal-header{
+    background-color: #1e6377;
+    border-radius: 0;
+}
+.modal-title{
+    font-family: 'Oswald', sans-serif;
+    color:#eeeeee;
+}
+
+.modal-close{
+    color: white;
+    font-size: 20px;
+}
+.modal-footer{
+    border: none;
+}
+.row-header{
+
+    display: none;
+}
+.cart-header{
+
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    flex-direction: row;
+}
+.cart-header p{
+    background-color: #eeeeee;
+    padding:10px;
+    width: 33%;
+}
+.cart-row{
+    margin: 20px;
+}
 .container-fluid {
     padding: 0;
 }
+.col-sm{
 
+    padding: 10px;
+
+}
+
+.container{
+    border:none;
+}
 .card {
     max-width: 340px;
     margin-top: 20px;
@@ -293,13 +343,16 @@ h1 {
     margin: 30px auto;
 }
 
+.qty{
+    margin:0;
+}
 .qty .count {
     color: #000;
     display: inline-block;
-    vertical-align: top;
-    font-size: 25px;
+    vertical-align: center;
+    font-size: 18px;
     font-weight: 700;
-    line-height: 30px;
+    line-height: 20px;
     padding: 0 2px;
     min-width: 35px;
     text-align: center;
@@ -308,28 +361,31 @@ h1 {
 .qty .plus {
     cursor: pointer;
     display: inline-block;
-    vertical-align: top;
+    vertical-align: center;
     color: white;
-    width: 30px;
-    height: 30px;
-    font: 30px/1 Arial, sans-serif;
-    text-align: center;
-    border-radius: 50%;
-}
-
-.qty .minus {
-    cursor: pointer;
-    display: inline-block;
-    vertical-align: top;
-    color: white;
-    width: 30px;
-    height: 30px;
-    font: 30px/1 Arial, sans-serif;
+    width: 20px;
+    height: 20px;
+    font: 18px/1 Arial, sans-serif;
     text-align: center;
     border-radius: 50%;
     background-clip: padding-box;
 }
 
+.qty .minus {
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: center;
+    color: white;
+    width: 20px;
+    height: 20px;
+    font: 18px/1 Arial, sans-serif;
+    text-align: center;
+    border-radius: 50%;
+    background-clip: padding-box;
+}
+.mt-5{
+    margin: 2px !important;
+}
 div {
     text-align: center;
 }
@@ -354,7 +410,7 @@ input {
     width: 2%;
 }
 
-nput::-webkit-outer-spin-button,
+input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;

@@ -1,4 +1,6 @@
-let itemToCart = document.querySelectorAll(".toggle-button");
+let cartCounter = 0;
+function addItemToCart() {
+    let itemToCart = document.querySelectorAll(".toggle-button");
 
 for (let item of itemToCart) {
     item.addEventListener('click', (event) => {
@@ -29,64 +31,86 @@ function snackBaring() {
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 }
 
-function quantityCounter() {
-    $(document).ready(function () {
-        $('.count').prop('disabled', false);
-        $(document).on('click', '.plus', function () {
-            $('.count').val(parseInt($('.count').val()) + 1);
-            if ($('.count').val() == 11) {
-                $('.count').val(10);
-            }
+
         });
-        $(document).on('click', '.minus', function () {
-            $('.count').val(parseInt($('.count').val()) - 1);
-            if ($('.count').val() == 0) {
-                $('.count').val(1);
-            }
-        });
-    })
-}
-let cartButton = document.querySelector("#cart-button");
-cartButton.addEventListener('click', function () {
-
-    getData("/apiGetCartData");
-
-});
-
-
-function getData(url) {
-
-    fetch(url,{  // set the path; the method is GET by default, but can be modified with a second parameter
-    headers : {
-        'Content-Type': 'application/json',
-            'Accept': 'application/json'
     }
+}
+
+function getCartItems() {
+    let cartButton = document.querySelector("#cart-button");
+
+    cartButton.addEventListener('click', function () {
+
+        getData("/apiGetCartData", loadCartData);
+
+    });
+}
+
+function getData(url, callback) {
+
+    fetch(url, {  // set the path; the method is GET by default, but can be modified with a second parameter
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
     })
-        .then((response) => response.json())  // parse JSON format into JS object
-        .then((data) => {
-            console.log(data);
-        })
+        .then(response => response.json())  // parse JSON format into JS object
+        .then(data => callback(data))
+}
+
+function loadCartData(cartItems) {
+
+
+    for(let i=cartCounter; i<cartItems.length; i++){
+        cartCounter ++;
+        console.log(cartCounter);
+        displayCartData(cartItems[i])
+    }
+
 
 }
 
-// Example POST method implementation:
+function displayCartData(item) {
+    const emptyP = document.querySelector('#empty');
+    const body = document.querySelector('#container');
+    const header = document.querySelector('.row-header');
+
+    const template = document.querySelector('#cart-template');
+    const clone = document.importNode(template.content, true);
+
+    const name = clone.querySelector('#name');
+    const price = clone.querySelector('#price');
+    const counter = clone.querySelector('.count');
+
+    emptyP.textContent = "";
+    header.style.display = "block";
+    name.textContent = item["name"];
+    counter.setAttribute('value',`${item['amount']}`);
+    price.textContent = item["defaultPrice"] + " USD";
+    body.appendChild(clone);
+
+}
+
+
 async function postData(url, data) {
-    // Default options are marked with *
+
     const response = fetch(url, {
-        method: 'POST', // *GET, POST, PUT, DELETE, etc.
-        mode: 'cors', // no-cors, *cors, same-origin
-        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: 'same-origin', // include, *same-origin, omit
+        method: 'POST',
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
         headers: {
             'Content-Type': 'application/json'
-            // 'Content-Type': 'application/x-www-form-urlencoded',
+
         },
-        redirect: 'follow', // manual, *follow, error
-        referrerPolicy: 'no-referrer', // no-referrer, *client
-        body: JSON.stringify(data) // body data type must match "Content-Type" header
+        redirect: 'follow', //
+        referrerPolicy: 'no-referrer',
+        body: JSON.stringify(data)
     });
-    return response; // parses JSON response into native JavaScript objects
+    return response;
 }
 
-quantityCounter();
+addItemToCart();
+getCartItems();
+
 

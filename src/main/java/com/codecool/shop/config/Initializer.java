@@ -47,8 +47,8 @@ public class Initializer implements ServletContextListener {
         productDataStore.add(new Product(" Arsenolite",69,"USD","Get's you out any rough situation.",other,rockFactory));
         productDataStore.add(new Product("Fornacite",59,"USD","It's useless, but beautiful!",holiday,mineralMine));
         productDataStore.add(new Product("Dickite",64,"USD","It helps you in bed and everywhere where you need it!",holiday,rockFactory));
-        productDataStore.add(new Product("Fukalite",999,"USD","Makes rich people a little bit less riche.r",animal,mineralMine));
-        productDataStore.add(new Product("Goosecreekite",39,"USD","A green rock with green crystals, you need more?!",cartoon,rockFactory));
+        productDataStore.add(new Product("Fukalite",999,"USD","Makes rich people a little bit less richer",animal,mineralMine));
+        productDataStore.add(new Product("Goosecreekite",39,"USD","A pink rock with green crystals, you need more?!",cartoon,rockFactory));
         productDataStore.add(new Product("Cummingtonite",29,"USD","No one knows what it is good for, but looks cool.",cartoon,mineralMine));
         /*productDataStore.add(new Product("Dragon shard",49,"USD","Rocks + dragon breath = Dragon shard.",blue,rockFactory));
         productDataStore.add(new Product("Analcime",53,"USD","Helps you get your loved one.",pink,mineralMine));

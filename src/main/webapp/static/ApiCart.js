@@ -58,6 +58,8 @@ function getData(url, callback) {
 }
 
 function loadCartData(cartItems) {
+    const checkOut = document.getElementById('checkout');
+    checkOut.disabled = cartItems.length == 0;
 
 
     for(let i=cartCounter; i<cartItems.length; i++){
@@ -84,7 +86,7 @@ function displayCartData(item) {
     emptyP.textContent = "";
     header.style.display = "block";
     name.textContent = item["name"];
-    counter.setAttribute('value',`${item['amount']}`);
+    // counter.setAttribute('value',`${item['amount']}`);
     price.textContent = item["defaultPrice"] + " USD";
     body.appendChild(clone);
 
@@ -111,5 +113,6 @@ async function postData(url, data) {
 
 addItemToCart();
 getCartItems();
+snackBaring();
 
 

@@ -1,3 +1,13 @@
+body{
+    background-color: #4a4a4a;
+}
+h1{
+    background-color: rgba(0,0,0,0.4);
+    padding: 10px 0;
+    margin: 0 auto;
+    color:#E9E861;
+    text-align: center;
+}
 .row {
     display: -ms-flexbox; /* IE10 */
     display: flex;
@@ -32,6 +42,10 @@
     padding: 5px 20px 15px 20px;
     border: 1px solid lightgrey;
     border-radius: 3px;
+    margin-top: 100px;
+}
+.main-wrapper{
+    margin-top:150px;
 }
 
 input[type=text] {
@@ -78,6 +92,9 @@ span.price {
     float: left;
 }
 
+.col-25 .container{
+    padding-top:20px;
+}
 .main-wrapper {
     width: 70%;
     margin: 30px auto;
@@ -89,6 +106,7 @@ span.price {
         flex-direction: column-reverse;
     }
     .col-25 {
+
         margin-bottom: 20px;
     }
 }

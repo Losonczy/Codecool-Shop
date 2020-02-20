@@ -7,6 +7,26 @@ for (let item of itemToCart) {
                 console.log(data); // JSON data parsed by `response.json()` call
             });
     });
+    item.addEventListener('click', (event) => {
+        let x = document.getElementById("snackbar");
+
+        // Add the "show" class to DIV
+        x.className = "show";
+
+        // After 3 seconds, remove the show class from DIV
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    })
+}
+
+function snackBaring() {
+    // Get the snackbar DIV
+    let x = document.getElementById("snackbar");
+
+    // Add the "show" class to DIV
+    x.className = "show";
+
+    // After 3 seconds, remove the show class from DIV
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 }
 
 function quantityCounter() {

@@ -12,18 +12,8 @@ public class Cart {
 
 
     public void addProduct(Product product) {
-        if (productsInCart.size() != 0) {
-            for (Product existingProduct : productsInCart) {
-                if (product.getName().equals(existingProduct.getName())) {
-                    existingProduct.setDefaultPrice(existingProduct.getDefaultPrice() + product.getDefaultPrice());
-                    existingProduct.setAmount(existingProduct.getAmount() + product.getAmount());
-                } else {
-                    productsInCart.add(product);
-                }
-            }
-        }else{
             productsInCart.add(product);
-        }
+
 
 
     }

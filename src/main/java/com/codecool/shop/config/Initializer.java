@@ -1,7 +1,6 @@
 package com.codecool.shop.config;
 
 import com.codecool.shop.Connection;
-import com.codecool.shop.dao.DaoTest;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;

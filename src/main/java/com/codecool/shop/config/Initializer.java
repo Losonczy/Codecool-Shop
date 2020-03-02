@@ -1,5 +1,7 @@
 package com.codecool.shop.config;
 
+import com.codecool.shop.Connection;
+import com.codecool.shop.dao.DaoTest;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
@@ -13,6 +15,7 @@ import com.codecool.shop.model.Supplier;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
+import java.sql.SQLException;
 
 @WebListener
 public class Initializer implements ServletContextListener {
@@ -22,6 +25,12 @@ public class Initializer implements ServletContextListener {
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
+        Connection connection=new Connection();
+        try {
+            connection.setup();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         //setting up a new supplier
         Supplier mineralMine = new Supplier("Mineral Mine Co.", "Quality rocks and minerals");

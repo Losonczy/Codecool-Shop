@@ -19,8 +19,8 @@ public class Connection {
         PGSimpleDataSource dataSource = new PGSimpleDataSource();
 
         dataSource.setDatabaseName("webshop");
-        dataSource.setUser("barna");
-        dataSource.setPassword("Linoleum69");
+        dataSource.setUser("losonczy");
+        dataSource.setPassword("1234");
 
         dataSource.getConnection().close();
 

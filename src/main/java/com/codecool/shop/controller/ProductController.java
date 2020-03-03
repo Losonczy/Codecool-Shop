@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -33,8 +34,14 @@ public class ProductController extends HttpServlet {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
-        context.setVariable("category", productCategoryDataStore.find(1));
-        //context.setVariable("products", productDataStore.getAll());
+
+        try {
+            context.setVariable("category", productCategoryDataStore.find(1));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        context.setVariable("products", productDataStore.getAll());
+
         context.setVariable("itemsInCart",cart.getAllProductsInCart());
         // // Alternative setting of the template context
         // Map<String, Object> params = new HashMap<>();

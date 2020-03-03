@@ -57,14 +57,17 @@ public class ProductDaoMem implements ProductDao {
 
 
     @Override
-    public Product find(int id) throws SQLException { //TODO swap placeholders
-        String get = "SELECT * FROM product WHERE id= ?;";
+    public Product find(int id) throws SQLException {
+        String get = "SELECT product.id AS p_id, product.name AS p_name, product.default_price AS p_default_price, product.currency_string AS p_curency_string, product.description AS p_description, product.amount AS p_amount, product_category.id AS pc_id, product_category.name AS pc_name, product_category.department AS pc_department, product_category.description AS pc_description, s.id AS s_id, s.name AS s_name, s.description AS s_description " +
+                "FROM product " +
+                "LEFT JOIN product_category ON product.product_category_id = product_category.id " +
+                "LEFT JOIN supplier s on product.supplier_id = s.id WHERE product.id= ?;";
         PreparedStatement stmt = dataSource.getConnection().prepareStatement(get);
 
         stmt.setInt(1, id);
         ResultSet res = stmt.executeQuery();
         if (res.next()) {
-            Product product = new Product(res.getInt("id"), res.getString("name"), Integer.parseInt(res.getString("default_price")), res.getString("currency_string"), res.getString("description"), new ProductCategory(5, "ProductTest", "ProducttestDepartment", "ProducttestDescription"), new Supplier("SupplierTest", "Supplierdescription"), Integer.parseInt(res.getString("amount")));
+            Product product = new Product(res.getInt("p_id"), res.getString("p_name"), Integer.parseInt(res.getString("p_default_price")), res.getString("p_curency_string"), res.getString("p_description"), new ProductCategory(res.getInt("pc_id"), res.getString("pc_name"), res.getString("pc_department"), res.getString("pc_description")), new Supplier(res.getString("s_name"), res.getString("s_description")), Integer.parseInt(res.getString("p_amount")));
             return product;
         }
         return null;
@@ -81,17 +84,21 @@ public class ProductDaoMem implements ProductDao {
     }
 
     @Override
-    public List<Product> getAll() throws SQLException { //TODO swap placeholders
+    public List<Product> getAll() throws SQLException {
         List<Product> allProducts = new ArrayList<>();
-        String getAll = "SELECT * FROM product;";
+
+        String getAll = "SELECT product.id AS p_id, product.name AS p_name, product.default_price AS p_default_price, product.currency_string AS p_curency_string, product.description AS p_description, product.amount AS p_amount, product_category.id AS pc_id, product_category.name AS pc_name, product_category.department AS pc_department, product_category.description AS pc_description, s.id AS s_id, s.name AS s_name, s.description AS s_description " +
+                "FROM product " +
+                "LEFT JOIN product_category ON product.product_category_id = product_category.id " +
+                "LEFT JOIN supplier s on product.supplier_id = s.id;";
+
         PreparedStatement stmt = dataSource.getConnection().prepareStatement(getAll);
+
         ResultSet res = stmt.executeQuery();
 
         while (res.next()) {
-            //Product product= new Product(res.getString("name"),Integer.parseInt(res.getString("default_price")),res.getString("currency_string"),res.getString("description"),res.getString("product_category_id"),res.getString("supplier_id"),Integer.parseInt(res.getString("amount")));
-            Product product = new Product(res.getInt("id"), res.getString("name"), Integer.parseInt(res.getString("default_price")), res.getString("currency_string"), res.getString("description"), new ProductCategory(5, "ProductTest", "ProducttestDepartment", "ProducttestDescription"), new Supplier("SupplierTest", "Supplierdescription"), Integer.parseInt(res.getString("amount")));
+            Product product = new Product(res.getInt("p_id"), res.getString("p_name"), Integer.parseInt(res.getString("p_default_price")), res.getString("p_curency_string"), res.getString("p_description"), new ProductCategory(res.getInt("pc_id"), res.getString("pc_name"), res.getString("pc_department"), res.getString("pc_description")), new Supplier(res.getString("s_name"), res.getString("s_description")), Integer.parseInt(res.getString("p_amount")));
             allProducts.add(product);
-
         }
 
         return allProducts;
@@ -100,13 +107,17 @@ public class ProductDaoMem implements ProductDao {
     @Override
     public List<Product> getBy(Supplier supplier) throws SQLException {
         List<Product> allProducts = new ArrayList<>();
-        String get = "SELECT * FROM product WHERE supplier_id= ?;";
+        String get = "SELECT product.id AS p_id, product.name AS p_name, product.default_price AS p_default_price, product.currency_string AS p_curency_string, product.description AS p_description, product.amount AS p_amount, product_category.id AS pc_id, product_category.name AS pc_name, product_category.department AS pc_department, product_category.description AS pc_description, s.id AS s_id, s.name AS s_name, s.description AS s_description " +
+                "FROM product " +
+                "LEFT JOIN product_category ON product.product_category_id = product_category.id " +
+                "LEFT JOIN supplier s on product.supplier_id = s.id " +
+                "WHERE supplier.id= ?;";
         PreparedStatement stmt = dataSource.getConnection().prepareStatement(get);
 
         stmt.setInt(1, supplier.getId());
         ResultSet res = stmt.executeQuery();
         if (res.next()) {
-            Product product = new Product(res.getInt("id"), res.getString("name"), Integer.parseInt(res.getString("default_price")), res.getString("currency_string"), res.getString("description"), new ProductCategory(5, "ProductTest", "ProducttestDepartment", "ProducttestDescription"), new Supplier("SupplierTest", "Supplierdescription"), Integer.parseInt(res.getString("amount")));
+            Product product = new Product(res.getInt("p_id"), res.getString("p_name"), Integer.parseInt(res.getString("p_default_price")), res.getString("p_curency_string"), res.getString("p_description"), new ProductCategory(res.getInt("pc_id"), res.getString("pc_name"), res.getString("pc_department"), res.getString("pc_description")), new Supplier(res.getString("s_name"), res.getString("s_description")), Integer.parseInt(res.getString("p_amount")));
             allProducts.add(product);
         }
         return allProducts;
@@ -116,13 +127,17 @@ public class ProductDaoMem implements ProductDao {
     @Override
     public List<Product> getBy(ProductCategory productCategory) throws SQLException {
         List<Product> allProducts = new ArrayList<>();
-        String get = "SELECT * FROM product WHERE product_category_id= ?;";
+        String get = "SELECT product.id AS p_id, product.name AS p_name, product.default_price AS p_default_price, product.currency_string AS p_curency_string, product.description AS p_description, product.amount AS p_amount, product_category.id AS pc_id, product_category.name AS pc_name, product_category.department AS pc_department, product_category.description AS pc_description, s.id AS s_id, s.name AS s_name, s.description AS s_description " +
+                "FROM product " +
+                "LEFT JOIN product_category ON product.product_category_id = product_category.id " +
+                "LEFT JOIN supplier s on product.supplier_id = s.id " +
+                "WHERE product_category.id= ?;";
         PreparedStatement stmt = dataSource.getConnection().prepareStatement(get);
 
         stmt.setInt(1, productCategory.getId());
         ResultSet res = stmt.executeQuery();
         if (res.next()) {
-            Product product = new Product(res.getInt("id"), res.getString("name"), Integer.parseInt(res.getString("default_price")), res.getString("currency_string"), res.getString("description"), new ProductCategory(5, "ProductTest", "ProducttestDepartment", "ProducttestDescription"), new Supplier("SupplierTest", "Supplierdescription"), Integer.parseInt(res.getString("amount")));
+            Product product = new Product(res.getInt("p_id"), res.getString("p_name"), Integer.parseInt(res.getString("p_default_price")), res.getString("p_curency_string"), res.getString("p_description"), new ProductCategory(res.getInt("pc_id"), res.getString("pc_name"), res.getString("pc_department"), res.getString("pc_description")), new Supplier(res.getString("s_name"), res.getString("s_description")), Integer.parseInt(res.getString("p_amount")));
             allProducts.add(product);
         }
         return allProducts;

@@ -31,7 +31,9 @@ public class Initializer implements ServletContextListener {
             e.printStackTrace();
         }
 
+        /*
         //setting up a new supplier
+
 //        Supplier mineralMine = new Supplier("Mineral Mine Co.", "Quality rocks and minerals");
 //        supplierDataStore.add(mineralMine);
 //        Supplier rockFactory = new Supplier("Rock Factory", "Best looking minerals made by time");
@@ -62,5 +64,9 @@ public class Initializer implements ServletContextListener {
 //        productDataStore.add(new Product("Analcime",53,"USD","Helps you get your loved one.",pink,mineralMine));
 //        productDataStore.add(new Product("Shattuckite",39,"USD","You can breath underwater with this rock...Or not.",blue,rockFactory));
 //        productDataStore.add(new Product("Welshite",49,"USD","Remove any disease.",white,mineralMine));*/
+
     }
+
+
+
 }

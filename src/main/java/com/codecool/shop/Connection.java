@@ -3,7 +3,6 @@ package com.codecool.shop;
 import javax.sql.DataSource;
 import java.sql.SQLException;
 
-import com.codecool.shop.dao.DaoTest;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;

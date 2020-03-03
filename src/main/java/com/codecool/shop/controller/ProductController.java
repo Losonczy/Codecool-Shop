@@ -40,7 +40,11 @@ public class ProductController extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        context.setVariable("products", productDataStore.getAll());
+        try {
+            context.setVariable("products", productDataStore.getAll());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         context.setVariable("itemsInCart",cart.getAllProductsInCart());
         // // Alternative setting of the template context

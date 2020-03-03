@@ -26,6 +26,10 @@ public class SupplierDaoMem implements SupplierDao {
         return instance;
     }
 
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
     @Override
     public void getDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
@@ -41,12 +45,10 @@ public class SupplierDaoMem implements SupplierDao {
         stmt.setString(3,supplier.getDescription());
         stmt.executeUpdate();
 
-
     }
 
     @Override
     public Supplier find(int id)throws SQLException {
-        return data.stream().filter(t -> t.getId()==id).findFirst().orElse(null);
 
         String get = "SELECT * FROM supplier WHERE id=?;";
         PreparedStatement stmt =dataSource.getConnection().prepareStatement(get);
@@ -78,7 +80,7 @@ public class SupplierDaoMem implements SupplierDao {
     PreparedStatement stmt = dataSource.getConnection().prepareStatement(getAll);
     ResultSet res = stmt.executeQuery();
     while(res.next()){
-        Supplier supplier = new Supplier(res.getString("name"),res.getString("description"));
+        Supplier supplier = new Supplier(res.getInt("id"),res.getString("name"),res.getString("description"));
         allSupplier.add(supplier);
     }
         return allSupplier;

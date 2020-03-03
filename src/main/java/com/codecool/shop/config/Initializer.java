@@ -32,6 +32,7 @@ public class Initializer implements ServletContextListener {
             e.printStackTrace();
         }
 
+        /*
         //setting up a new supplier
         Supplier mineralMine = new Supplier("Mineral Mine Co.", "Quality rocks and minerals");
         supplierDataStore.add(mineralMine);

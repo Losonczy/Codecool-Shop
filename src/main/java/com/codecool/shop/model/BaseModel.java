@@ -10,11 +10,13 @@ public class BaseModel {
     protected String description;
     protected int amount;
 
-    public BaseModel(String name) {
+    public BaseModel(int id, String name) {
+        this.id=id;
         this.name = name;
     }
 
-    public BaseModel(String name, String description) {
+    public BaseModel(int id, String name, String description) {
+        this.id=id;
         this.name = name;
         this.description = description;
     }

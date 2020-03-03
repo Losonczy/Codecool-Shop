@@ -67,7 +67,7 @@ public class ProductDaoMem implements ProductDao {
         stmt.setInt(1, id);
         ResultSet res = stmt.executeQuery();
         if (res.next()) {
-            Product product = new Product(res.getInt("p_id"), res.getString("p_name"), Integer.parseInt(res.getString("p_default_price")), res.getString("p_curency_string"), res.getString("p_description"), new ProductCategory(res.getInt("pc_id"), res.getString("pc_name"), res.getString("pc_department"), res.getString("pc_description")), new Supplier(res.getString("s_name"), res.getString("s_description")), Integer.parseInt(res.getString("p_amount")));
+            Product product = new Product(res.getInt("p_id"), res.getString("p_name"), Integer.parseInt(res.getString("p_default_price")), res.getString("p_curency_string"), res.getString("p_description"), new ProductCategory(res.getInt("pc_id"), res.getString("pc_name"), res.getString("pc_department"), res.getString("pc_description")), new Supplier(res.getInt("s_id"), res.getString("s_name"), res.getString("s_description")), Integer.parseInt(res.getString("p_amount")));
             return product;
         }
         return null;
@@ -97,7 +97,7 @@ public class ProductDaoMem implements ProductDao {
         ResultSet res = stmt.executeQuery();
 
         while (res.next()) {
-            Product product = new Product(res.getInt("p_id"), res.getString("p_name"), Integer.parseInt(res.getString("p_default_price")), res.getString("p_curency_string"), res.getString("p_description"), new ProductCategory(res.getInt("pc_id"), res.getString("pc_name"), res.getString("pc_department"), res.getString("pc_description")), new Supplier(res.getString("s_name"), res.getString("s_description")), Integer.parseInt(res.getString("p_amount")));
+            Product product = new Product(res.getInt("p_id"), res.getString("p_name"), Integer.parseInt(res.getString("p_default_price")), res.getString("p_curency_string"), res.getString("p_description"), new ProductCategory(res.getInt("pc_id"), res.getString("pc_name"), res.getString("pc_department"), res.getString("pc_description")), new Supplier(res.getInt("s_id"), res.getString("s_name"), res.getString("s_description")), Integer.parseInt(res.getString("p_amount")));
             allProducts.add(product);
         }
 
@@ -117,7 +117,7 @@ public class ProductDaoMem implements ProductDao {
         stmt.setInt(1, supplier.getId());
         ResultSet res = stmt.executeQuery();
         if (res.next()) {
-            Product product = new Product(res.getInt("p_id"), res.getString("p_name"), Integer.parseInt(res.getString("p_default_price")), res.getString("p_curency_string"), res.getString("p_description"), new ProductCategory(res.getInt("pc_id"), res.getString("pc_name"), res.getString("pc_department"), res.getString("pc_description")), new Supplier(res.getString("s_name"), res.getString("s_description")), Integer.parseInt(res.getString("p_amount")));
+            Product product = new Product(res.getInt("p_id"), res.getString("p_name"), Integer.parseInt(res.getString("p_default_price")), res.getString("p_curency_string"), res.getString("p_description"), new ProductCategory(res.getInt("pc_id"), res.getString("pc_name"), res.getString("pc_department"), res.getString("pc_description")), new Supplier(res.getInt("s_id"), res.getString("s_name"), res.getString("s_description")), Integer.parseInt(res.getString("p_amount")));
             allProducts.add(product);
         }
         return allProducts;
@@ -137,7 +137,7 @@ public class ProductDaoMem implements ProductDao {
         stmt.setInt(1, productCategory.getId());
         ResultSet res = stmt.executeQuery();
         if (res.next()) {
-            Product product = new Product(res.getInt("p_id"), res.getString("p_name"), Integer.parseInt(res.getString("p_default_price")), res.getString("p_curency_string"), res.getString("p_description"), new ProductCategory(res.getInt("pc_id"), res.getString("pc_name"), res.getString("pc_department"), res.getString("pc_description")), new Supplier(res.getString("s_name"), res.getString("s_description")), Integer.parseInt(res.getString("p_amount")));
+            Product product = new Product(res.getInt("p_id"), res.getString("p_name"), Integer.parseInt(res.getString("p_default_price")), res.getString("p_curency_string"), res.getString("p_description"), new ProductCategory(res.getInt("pc_id"), res.getString("pc_name"), res.getString("pc_department"), res.getString("pc_description")), new Supplier(res.getInt("s_id"),res.getString("s_name"), res.getString("s_description")), Integer.parseInt(res.getString("p_amount")));
             allProducts.add(product);
         }
         return allProducts;

@@ -33,11 +33,12 @@ public class SupplierDaoMem implements SupplierDao {
 
     @Override
     public void add(Supplier supplier) throws SQLException {
-        String qr = "INSERT INTO supplier(name,description) VALUES(?,?);";
+        String qr = "INSERT INTO supplier(name,description) VALUES(?,?,?);";
         PreparedStatement stmt = dataSource.getConnection().prepareStatement(qr);
 
-        stmt.setString(1,supplier.getName());
-        stmt.setString(2,supplier.getDescription());
+        stmt.setInt(1,supplier.getId());
+        stmt.setString(2,supplier.getName());
+        stmt.setString(3,supplier.getDescription());
         stmt.executeUpdate();
 
 
@@ -60,8 +61,14 @@ public class SupplierDaoMem implements SupplierDao {
     }
 
     @Override
-    public void remove(int id) {
+    public void remove(int id) throws SQLException{
         data.remove(find(id));
+
+        String qr ="DELETE FROM supplier WHERE id=?;";
+        PreparedStatement stmt =dataSource.getConnection().prepareStatement(qr);
+
+        stmt.setInt(1,id);
+        stmt.executeUpdate();
     }
 
     @Override

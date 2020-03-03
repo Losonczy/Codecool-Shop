@@ -71,8 +71,14 @@ public class ProductDaoMem implements ProductDao {
     }
 
     @Override
-    public void remove(int id) {
-        //data.remove(find(id));
+    public void remove(int id) throws SQLException{
+        String qr = "DELETE * FROM product WHERE id= ?;";
+        PreparedStatement stmt = dataSource.getConnection().prepareStatement(qr);
+
+        stmt.setInt(1,id);
+        stmt.executeUpdate();
+
+
     }
 
     @Override

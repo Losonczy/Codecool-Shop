@@ -87,7 +87,17 @@ public class ProductDaoMem implements ProductDao {
     public List<Product> getAll() throws SQLException {
         List<Product> allProducts = new ArrayList<>();
 
-        String getAll = "SELECT product.id AS p_id, product.name AS p_name, product.default_price AS p_default_price, product.currency_string AS p_curency_string, product.description AS p_description, product.amount AS p_amount, product_category.id AS pc_id, product_category.name AS pc_name, product_category.department AS pc_department, product_category.description AS pc_description, s.id AS s_id, s.name AS s_name, s.description AS s_description " +
+        String getAll = "SELECT product.id AS p_id, " +
+                "product.name AS p_name, " +
+                "product.default_price AS p_default_price, " +
+                "product.currency_string AS p_curency_string, " +
+                "product.description AS p_description, " +
+                "product.amount AS p_amount, " +
+                "product_category.id AS pc_id, " +
+                "product_category.name AS pc_name, " +
+                "product_category.department AS pc_department, " +
+                "product_category.description AS pc_description, " +
+                "s.id AS s_id, s.name AS s_name, s.description AS s_description " +
                 "FROM product " +
                 "LEFT JOIN product_category ON product.product_category_id = product_category.id " +
                 "LEFT JOIN supplier s on product.supplier_id = s.id;";

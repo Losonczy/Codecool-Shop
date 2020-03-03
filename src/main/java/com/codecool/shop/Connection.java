@@ -28,8 +28,8 @@ public class Connection {
         PGSimpleDataSource dataSource = new PGSimpleDataSource();
 
         dataSource.setDatabaseName("webshop");
-        dataSource.setUser("barna");
-        dataSource.setPassword("Linoleum69");
+        dataSource.setUser("evelin");
+        dataSource.setPassword("95Marcius");
 
         dataSource.getConnection().close();
 

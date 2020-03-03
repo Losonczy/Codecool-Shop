@@ -12,25 +12,22 @@ public class Cart {
 
 
     public void addProduct(Product product) {
+
         boolean isContain = false;
-        if(productsInCart.size() == 0){
-            productsInCart.add(product);
-        }
 
         for (Product value : productsInCart) {
             if (product.getName().equals(value.getName())) {
                 isContain = true;
                 float price = value.getDefaultPrice();
-                int quantity = value.getQuantityInCart();
+                int quantity = value.getQuantity();
                 value.setDefaultPrice(price + product.getDefaultPrice());
-                value.setQuantityInCart(quantity + 1);
+                value.setQuantity(quantity + 1);
             }
         }
         if(!isContain){
             productsInCart.add(product);
         }
-
-
+        System.out.println(product.getQuantity());
 
     }
 

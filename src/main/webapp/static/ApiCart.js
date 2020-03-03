@@ -73,7 +73,7 @@ function displayCartData(item) {
     emptyP.textContent = "";
     header.style.display = "block";
     name.textContent = item["name"];
-    // counter.setAttribute('value',`${item['amount']}`);
+    counter.setAttribute('value',`${item['quantity']}`);
     price.textContent = item["defaultPrice"] + " USD";
     body.appendChild(clone);
 

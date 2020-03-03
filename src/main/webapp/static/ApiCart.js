@@ -69,6 +69,7 @@ function displayCartData(item) {
     const name = clone.querySelector('#name');
     const price = clone.querySelector('#price');
     const counter = clone.querySelector('.count');
+    counter.setAttribute('id', `counter_${item['id']}`);
 
     emptyP.textContent = "";
     header.style.display = "block";
@@ -76,8 +77,21 @@ function displayCartData(item) {
     counter.setAttribute('value',`${item['quantity']}`);
     price.textContent = item["defaultPrice"] + " USD";
     body.appendChild(clone);
+    // quantityCounter(item['id'],item['quantity']);
 
 }
+// function quantityCounter(id,quantity){
+//     const plus = document.querySelector('.plus');
+//     const minus = document.querySelector('.minus');
+//     const counter = document.querySelector(`#counter_${id}`);
+//
+//     plus.addEventListener('click',function () {
+//         counter.setAttribute('value',`${quantity+1}`);
+//     });
+//     minus.addEventListener('click',function () {
+//         counter.setAttribute('value',`${quantity+1}`);
+//     });
+// }
 
 
 async function postData(url, data) {

@@ -27,8 +27,15 @@ public class Cart {
         if(!isContain){
             productsInCart.add(product);
         }
-        System.out.println(product.getQuantity());
 
+    }
+
+    public void changeQuantity(int id, int quantity){
+        for(Product item: productsInCart){
+            if(item.getId() == id){
+                item.setQuantity(quantity);
+            }
+        }
     }
 
     public Product getNewItem(){

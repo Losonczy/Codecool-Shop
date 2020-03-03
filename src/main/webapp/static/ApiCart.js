@@ -1,4 +1,5 @@
 let cartCounter = 0;
+
 function addItemToCart() {
     let itemToCart = document.querySelectorAll(".toggle-button");
 
@@ -70,6 +71,11 @@ function displayCartData(item) {
     const price = clone.querySelector('#price');
     const counter = clone.querySelector('.count');
     counter.setAttribute('id', `counter_${item['id']}`);
+    const plus = clone.querySelector('.plus');
+    plus.setAttribute('id', `plus_${item['id']}`);
+    const minus = clone.querySelector('.minus');
+    minus.setAttribute('id', `minus_${item['id']}`);
+
 
     emptyP.textContent = "";
     header.style.display = "block";
@@ -77,21 +83,33 @@ function displayCartData(item) {
     counter.setAttribute('value',`${item['quantity']}`);
     price.textContent = item["defaultPrice"] + " USD";
     body.appendChild(clone);
-    // quantityCounter(item['id'],item['quantity']);
+    quantityCounter(item);
 
 }
-// function quantityCounter(id,quantity){
-//     const plus = document.querySelector('.plus');
-//     const minus = document.querySelector('.minus');
-//     const counter = document.querySelector(`#counter_${id}`);
-//
-//     plus.addEventListener('click',function () {
-//         counter.setAttribute('value',`${quantity+1}`);
-//     });
-//     minus.addEventListener('click',function () {
-//         counter.setAttribute('value',`${quantity+1}`);
-//     });
-// }
+function quantityCounter(item){
+    const plus = document.getElementById(`plus_${item['id']}`);
+    const minus = document.getElementById(`minus_${item['id']}`);
+    const counter = document.getElementById(`counter_${item['id']}`);
+
+    plus.addEventListener('click',function () {
+        item['quantity'] +=1;
+        counter.setAttribute('value',`${item['quantity']}`);
+        postData('/cartQuantity', {"id": item.id,"quantity": item['quantity'] })
+            .then((data) => {
+                console.log(data); // JSON data parsed by `response.json()` call
+            });
+
+    });
+    minus.addEventListener('click',function () {
+        item['quantity'] -=1;
+        counter.setAttribute('value',`${item['quantity']}`);
+        postData('/cartQuantity', {"id": item.id,"quantity": item['quantity']})
+            .then((data) => {
+                console.log(data); // JSON data parsed by `response.json()` call
+            });
+
+    });
+}
 
 
 async function postData(url, data) {

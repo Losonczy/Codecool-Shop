@@ -12,16 +12,22 @@ public class Cart {
 
 
     public void addProduct(Product product) {
-            productsInCart.add(product);
-
-
+        for(int i=0; i< productsInCart.size();i++){
+            if(product.getId() != productsInCart.get(i).getId()){
+                productsInCart.add(product);
+            }else{
+                float price = productsInCart.get(i).getDefaultPrice();
+                int quantity = productsInCart.get(i).getQuantityInCart();
+                productsInCart.get(i).setDefaultPrice(price + product.getDefaultPrice());
+                productsInCart.get(i).setQuantityInCart(quantity + 1);
+            }
+        }
 
     }
 
     public Product getNewItem(){
        return productsInCart.get(productsInCart.size()-1);
     }
-
 
     public List<Product> getAllProductsInCart() {
         return productsInCart;

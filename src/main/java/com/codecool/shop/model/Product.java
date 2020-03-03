@@ -8,6 +8,8 @@ public class Product extends BaseModel {
     transient private Currency defaultCurrency;
     transient private ProductCategory productCategory;
     transient private Supplier supplier;
+    private int quantityInCart = 1;
+
 
 
 
@@ -79,4 +81,11 @@ public class Product extends BaseModel {
                 this.supplier.getName());
     }
 
+    public int getQuantityInCart() {
+        return quantityInCart;
+    }
+
+    public void setQuantityInCart(int quantityInCart) {
+        this.quantityInCart = quantityInCart;
+    }
 }

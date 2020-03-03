@@ -31,6 +31,7 @@ public class ApiCart extends HttpServlet {
         CartItemId cartItemId = gson.fromJson(response, CartItemId.class);
         try {
             cart.addProduct(productDataStore.find(cartItemId.getId()));
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

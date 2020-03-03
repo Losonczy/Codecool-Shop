@@ -12,16 +12,25 @@ public class Cart {
 
 
     public void addProduct(Product product) {
-        for(int i=0; i< productsInCart.size();i++){
-            if(product.getId() != productsInCart.get(i).getId()){
-                productsInCart.add(product);
-            }else{
-                float price = productsInCart.get(i).getDefaultPrice();
-                int quantity = productsInCart.get(i).getQuantityInCart();
-                productsInCart.get(i).setDefaultPrice(price + product.getDefaultPrice());
-                productsInCart.get(i).setQuantityInCart(quantity + 1);
+        boolean isContain = false;
+        if(productsInCart.size() == 0){
+            productsInCart.add(product);
+        }
+
+        for (Product value : productsInCart) {
+            if (product.getName().equals(value.getName())) {
+                isContain = true;
+                float price = value.getDefaultPrice();
+                int quantity = value.getQuantityInCart();
+                value.setDefaultPrice(price + product.getDefaultPrice());
+                value.setQuantityInCart(quantity + 1);
             }
         }
+        if(!isContain){
+            productsInCart.add(product);
+        }
+
+
 
     }
 

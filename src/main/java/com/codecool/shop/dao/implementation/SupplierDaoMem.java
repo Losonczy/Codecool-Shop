@@ -37,10 +37,10 @@ public class SupplierDaoMem implements SupplierDao {
         PreparedStatement stmt = dataSource.getConnection().prepareStatement(qr);
 
         stmt.setString(1,supplier.getName());
+        stmt.setString(2,supplier.getDescription());
+        stmt.executeUpdate();
 
 
-                supplier.setId(data.size() + 1);
-        data.add(supplier);
     }
 
     @Override
@@ -54,7 +54,15 @@ public class SupplierDaoMem implements SupplierDao {
     }
 
     @Override
-    public List<Supplier> getAll() {
-        return data;
+    public List<Supplier> getAll() throws SQLException{
+    List<Supplier> allSupplier = new ArrayList<>();
+    String getAll = "SELECT * FROM supplier;";
+    PreparedStatement stmt = dataSource.getConnection().prepareStatement(getAll);
+    ResultSet res = stmt.executeQuery();
+    while(res.next()){
+        Supplier supplier = new Supplier(res.getString("name"),res.getString("description"));
+        allSupplier.add(supplier);
+    }
+        return allSupplier;
     }
 }

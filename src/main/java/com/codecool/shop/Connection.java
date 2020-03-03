@@ -14,7 +14,7 @@ public class Connection {
     public void setup() throws SQLException {
         DataSource dataSource = connect();
         DaoTest daoTest = new DaoTest(dataSource);
-        SupplierDao supplierDao =SupplierDaoMem.getInstance();
+        SupplierDao supplierDao = SupplierDaoMem.getInstance();
         //daoTest.add("engem");
     }
 

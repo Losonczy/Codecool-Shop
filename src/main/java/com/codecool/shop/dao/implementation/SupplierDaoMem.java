@@ -44,8 +44,19 @@ public class SupplierDaoMem implements SupplierDao {
     }
 
     @Override
-    public Supplier find(int id) {
-        return data.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
+    public Supplier find(int id)throws SQLException {
+        return data.stream().filter(t -> t.getId()==id).findFirst().orElse(null);
+
+        String get = "SELECT * FROM supplier WHERE id=?;";
+        PreparedStatement stmt =dataSource.getConnection().prepareStatement(get);
+
+        stmt.setInt(1,id);
+        ResultSet res = stmt.executeQuery();
+        Supplier supplier = null;
+        if(res.next()){
+            supplier = new Supplier(res.getInt("id"),res.getString("name"),res.getString("description"));
+        }
+        return supplier;
     }
 
     @Override

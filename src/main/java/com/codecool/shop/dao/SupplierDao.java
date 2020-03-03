@@ -11,7 +11,7 @@ public interface SupplierDao {
     void getDataSource(DataSource dataSource);
 
     void add(Supplier supplier) throws SQLException;
-    Supplier find(int id);
+    Supplier find(int id) throws SQLException;
     void remove(int id);
 
     List<Supplier> getAll() throws SQLException;

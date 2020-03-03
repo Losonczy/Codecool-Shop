@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.stream.Collectors;
 
 
@@ -28,7 +29,11 @@ public class ApiCart extends HttpServlet {
         ProductDao productDataStore = ProductDaoMem.getInstance();
         String response=req.getReader().lines().collect(Collectors.joining());
         CartItemId cartItemId = gson.fromJson(response, CartItemId.class);
-        cart.addProduct(productDataStore.find(cartItemId.getId()));
+        try {
+            cart.addProduct(productDataStore.find(cartItemId.getId()));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 

@@ -4,6 +4,8 @@ import javax.sql.DataSource;
 import java.sql.SQLException;
 
 import com.codecool.shop.dao.DaoTest;
+import com.codecool.shop.dao.SupplierDao;
+import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import org.postgresql.ds.PGSimpleDataSource;
 
 
@@ -12,6 +14,7 @@ public class Connection {
     public void setup() throws SQLException {
         DataSource dataSource = connect();
         DaoTest daoTest = new DaoTest(dataSource);
+        SupplierDao supplierDao =SupplierDaoMem.getInstance();
         //daoTest.add("engem");
     }
 

@@ -12,10 +12,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.stream.Collectors;
 
-@WebServlet(urlPatterns = {"/cartQuantity"})
-public class CartQuantity extends HttpServlet {
+
+@WebServlet(urlPatterns = {"/deleteCartItem"})
+public class DeleteCartItem extends HttpServlet {
     Cart cart= Cart.getInstance();
     private Gson gson = new Gson();
 
@@ -26,7 +28,12 @@ public class CartQuantity extends HttpServlet {
         String response=req.getReader().lines().collect(Collectors.joining());
 
         CartItem cartItemId = gson.fromJson(response, CartItem.class);
-        cart.changeQuantity(cartItemId.getId(),cartItemId.getQuantity());
+        try {
+            cart.removeProduct(productDataStore.find(cartItemId.getId()));
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        };
 
     }
 }

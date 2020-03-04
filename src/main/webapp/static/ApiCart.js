@@ -3,19 +3,20 @@ let cartCounter = 0;
 function addItemToCart() {
     let itemToCart = document.querySelectorAll(".toggle-button");
 
-for (let item of itemToCart) {
-    item.addEventListener('click', (event) => {
-        postData('/apiCart', {"id": item.id})
-            .then((data) => {
-                console.log(data); // JSON data parsed by `response.json()` call
-            });
-    });
-    item.addEventListener('click', (event) => {
-        snackBaring();
-    })
-}
+    for (let item of itemToCart) {
+        item.addEventListener('click', (event) => {
+            postData('/apiCart', {"id": item.id})
+                .then((data) => {
+                    console.log(data); // JSON data parsed by `response.json()` call
+                });
+        });
+        item.addEventListener('click', (event) => {
+            snackBaring();
+        })
+    }
 
 }
+
 function snackBaring() {
     // Get the snackbar DIV
     let x = document.getElementById("snackbar");
@@ -24,7 +25,9 @@ function snackBaring() {
     x.className = "show";
 
     // After 3 seconds, remove the show class from DIV
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    setTimeout(function () {
+        x.className = x.className.replace("show", "");
+    }, 3000);
 }
 
 function getCartItems() {
@@ -54,7 +57,8 @@ function loadCartData(cartItems) {
     const checkOut = document.getElementById('checkout');
     checkOut.disabled = cartItems.length == 0;
 
-    for(let i=0; i<cartItems.length; i++){
+
+    for (let i = 0; i < cartItems.length; i++) {
         displayCartData(cartItems[i]);
     }
 }
@@ -66,47 +70,93 @@ function displayCartData(item) {
 
     const template = document.querySelector('#cart-template');
     const clone = document.importNode(template.content, true);
-
+    const row  = clone.querySelector('.cart-row');
+    row.setAttribute('id', `body_${item['id']}`);
     const name = clone.querySelector('#name');
     const price = clone.querySelector('#price');
+    price.setAttribute('id', `price_${item['id']}`);
     const counter = clone.querySelector('.count');
     counter.setAttribute('id', `counter_${item['id']}`);
     const plus = clone.querySelector('.plus');
     plus.setAttribute('id', `plus_${item['id']}`);
     const minus = clone.querySelector('.minus');
     minus.setAttribute('id', `minus_${item['id']}`);
+    const delete_button = clone.querySelector('#delete-img');
+    delete_button.setAttribute('id', `delete_${item['id']}`);
 
 
     emptyP.textContent = "";
     header.style.display = "block";
     name.textContent = item["name"];
-    counter.setAttribute('value',`${item['quantity']}`);
-    price.textContent = item["defaultPrice"] + " USD";
+    counter.setAttribute('value', `${item['quantity']}`);
+
+    price.textContent = item["defaultPrice"] * item['quantity'] + " USD";
+
+
     body.appendChild(clone);
     quantityCounter(item);
+    deleteItem(item);
 
 }
-function quantityCounter(item){
+function deleteItem(item){
+    const delete_button= document.getElementById(`delete_${item['id']}`);
+    const itemContainer = document.getElementById(`body_${item['id']}`);
+    delete_button.addEventListener('click',function () {
+        let result = confirm("Are you sure you want to delete?");
+        if (result) {
+            itemContainer.remove();
+            postData('/deleteCartItem', {
+                "id": item.id,
+            })
+                .then((data) => {
+                    console.log(data);
+                });
+        }
+    })
+}
+
+function quantityCounter(item) {
     const plus = document.getElementById(`plus_${item['id']}`);
     const minus = document.getElementById(`minus_${item['id']}`);
     const counter = document.getElementById(`counter_${item['id']}`);
+    const price = document.getElementById(`price_${item['id']}`);
 
-    plus.addEventListener('click',function () {
-        item['quantity'] +=1;
-        counter.setAttribute('value',`${item['quantity']}`);
-        postData('/cartQuantity', {"id": item.id,"quantity": item['quantity'] })
-            .then((data) => {
-                console.log(data); // JSON data parsed by `response.json()` call
-            });
+    plus.addEventListener('click', function () {
+        if (item['quantity'] <= item['amount'] && item["quantity"] >= 1) {
+            item['quantity'] += 1;
+            price.textContent = item["defaultPrice"]*item['quantity'] + " USD";
+
+            counter.setAttribute('value', `${item['quantity']}`);
+            postData('/cartQuantity', {
+                "id": item.id,
+                "quantity": item['quantity'],
+                "defaultPrice": item["defaultPrice"]
+            })
+                .then((data) => {
+                    console.log(data); // JSON data parsed by `response.json()` call
+                });
+            console.log(item["defaultPrice"]);
+        }
 
     });
-    minus.addEventListener('click',function () {
-        item['quantity'] -=1;
-        counter.setAttribute('value',`${item['quantity']}`);
-        postData('/cartQuantity', {"id": item.id,"quantity": item['quantity']})
-            .then((data) => {
-                console.log(data); // JSON data parsed by `response.json()` call
-            });
+    minus.addEventListener('click', function () {
+        if (item["quantity"] > 1 && item['quantity'] <= item['amount'] + 1) {
+            item['quantity'] -= 1;
+            if (item["quantity"] >= 1) {
+                price.textContent = item["defaultPrice"]*item['quantity'] + " USD";
+            }
+
+            counter.setAttribute('value', `${item['quantity']}`);
+            postData('/cartQuantity', {
+                "id": item.id,
+                "quantity": item['quantity'],
+                "defaultPrice": item["defaultPrice"]
+            })
+                .then((data) => {
+                    console.log(data); // JSON data parsed by `response.json()` call
+                });
+            console.log(item["defaultPrice"]);
+        }
 
     });
 }

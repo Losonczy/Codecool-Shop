@@ -10,7 +10,6 @@ public class Cart {
     private List<Product> productsInCart = new ArrayList<>();
     private static final Cart INSTANCE = new Cart();
 
-
     public void addProduct(Product product) {
 
         boolean isContain = false;
@@ -22,33 +21,46 @@ public class Cart {
                 int quantity = value.getQuantity();
                 value.setDefaultPrice(price + product.getDefaultPrice());
                 value.setQuantity(quantity + 1);
+
             }
         }
-        if(!isContain){
+        if (!isContain) {
             productsInCart.add(product);
         }
 
     }
 
-    public void changeQuantity(int id, int quantity){
-        for(Product item: productsInCart){
-            if(item.getId() == id){
+    public void removeProduct(Product product) {
+
+        int productIndex = 0;
+        for(Product item :productsInCart){
+            if(product.getId() == item.getId()){
+                productIndex = productsInCart.indexOf(item);
+            }
+        }
+
+        productsInCart.remove(productIndex);
+
+    }
+
+
+    public void changeQuantity(int id, int quantity) {
+        for (Product item : productsInCart) {
+            if (item.getId() == id) {
                 item.setQuantity(quantity);
+
             }
         }
     }
 
-    public Product getNewItem(){
-       return productsInCart.get(productsInCart.size()-1);
+    public Product getNewItem() {
+        return productsInCart.get(productsInCart.size() - 1);
     }
 
     public List<Product> getAllProductsInCart() {
         return productsInCart;
     }
 
-    public void removeProduct(Product product) {
-        productsInCart.remove(product);
-    }
 
     public HashMap<Product, Integer> getCountedProduct() {
         HashMap<Product, Integer> countedProducts = new HashMap<>();
@@ -79,7 +91,6 @@ public class Cart {
         }
         return count;
     }
-
 
     public static Cart getInstance() {
         return INSTANCE;

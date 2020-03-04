@@ -11,7 +11,7 @@ public class Cart {
     private static final Cart INSTANCE = new Cart();
 
     public void addProduct(Product product) {
-        CartItem cartItem = new CartItem();
+
         boolean isContain = false;
 
         for (Product value : productsInCart) {
@@ -24,32 +24,43 @@ public class Cart {
 
             }
         }
-        if(!isContain){
+        if (!isContain) {
             productsInCart.add(product);
         }
 
     }
 
-    public void changeQuantity(int id, int quantity){
-        for(Product item: productsInCart){
-            if(item.getId() == id){
+    public void removeProduct(Product product) {
+
+        int productIndex = 0;
+        for(Product item :productsInCart){
+            if(product.getId() == item.getId()){
+                productIndex = productsInCart.indexOf(item);
+            }
+        }
+
+        productsInCart.remove(productIndex);
+
+    }
+
+
+    public void changeQuantity(int id, int quantity) {
+        for (Product item : productsInCart) {
+            if (item.getId() == id) {
                 item.setQuantity(quantity);
 
             }
         }
     }
 
-    public Product getNewItem(){
-       return productsInCart.get(productsInCart.size()-1);
+    public Product getNewItem() {
+        return productsInCart.get(productsInCart.size() - 1);
     }
 
     public List<Product> getAllProductsInCart() {
         return productsInCart;
     }
 
-    public void removeProduct(Product product) {
-        productsInCart.remove(product);
-    }
 
     public HashMap<Product, Integer> getCountedProduct() {
         HashMap<Product, Integer> countedProducts = new HashMap<>();
@@ -80,13 +91,6 @@ public class Cart {
         }
         return count;
     }
-
-//    public int getCartPrices(){
-//        for(Product product: productsInCart){
-//           product.getQuantity() * product.
-//        }
-//    }
-
 
     public static Cart getInstance() {
         return INSTANCE;

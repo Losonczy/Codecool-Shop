@@ -70,7 +70,8 @@ function displayCartData(item) {
 
     const template = document.querySelector('#cart-template');
     const clone = document.importNode(template.content, true);
-
+    const row  = clone.querySelector('.cart-row');
+    row.setAttribute('id', `body_${item['id']}`);
     const name = clone.querySelector('#name');
     const price = clone.querySelector('#price');
     price.setAttribute('id', `price_${item['id']}`);
@@ -80,6 +81,8 @@ function displayCartData(item) {
     plus.setAttribute('id', `plus_${item['id']}`);
     const minus = clone.querySelector('.minus');
     minus.setAttribute('id', `minus_${item['id']}`);
+    const delete_button = clone.querySelector('#delete-img');
+    delete_button.setAttribute('id', `delete_${item['id']}`);
 
 
     emptyP.textContent = "";
@@ -92,7 +95,24 @@ function displayCartData(item) {
 
     body.appendChild(clone);
     quantityCounter(item);
+    deleteItem(item);
 
+}
+function deleteItem(item){
+    const delete_button= document.getElementById(`delete_${item['id']}`);
+    const itemContainer = document.getElementById(`body_${item['id']}`);
+    delete_button.addEventListener('click',function () {
+        let result = confirm("Are you sure you want to delete?");
+        if (result) {
+            itemContainer.remove();
+            postData('/deleteCartItem', {
+                "id": item.id,
+            })
+                .then((data) => {
+                    console.log(data);
+                });
+        }
+    })
 }
 
 function quantityCounter(item) {

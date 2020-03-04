@@ -172,6 +172,7 @@ h1 {
     background-color: #eeeeee;
     padding:10px;
     width: 33%;
+    border: 2px solid white;
 }
 .cart-row{
     margin: 20px;
@@ -212,7 +213,25 @@ h1 {
 .card-header {
     min-height: 140px;
 }
-
+.delete-header{
+    background-color: white !important;
+    max-width: 30px;
+}
+#delete{
+    max-width: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: flex-start;
+}
+#delete img{
+    max-width: 30px;
+}
+#delete img:hover{
+    cursor: pointer;
+    transform: scale(1.5);
+}
 .card img {
 
     max-height: 300px;

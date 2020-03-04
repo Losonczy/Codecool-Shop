@@ -214,23 +214,40 @@ h1 {
     min-height: 140px;
 }
 .delete-header{
-    background-color: white !important;
-    max-width: 30px;
+    /*background-color: white !important;*/
+    max-width: 0;
 }
 #delete{
-    max-width: 50px;
+
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
-    align-content: flex-start;
-    align-items: flex-start;
+    justify-content:center;
+    align-content: center;
+    align-items: center;
 }
 #delete img{
+
     max-width: 30px;
 }
 #delete img:hover{
     cursor: pointer;
     transform: scale(1.5);
+}
+
+.total-cost{
+    display: none;
+    justify-content:right;
+    child-align: right;
+    margin-top: 3rem;
+    background-color: rgba(255, 222, 75, 0.42);
+
+}
+.total-cost p{
+    margin: 10px;
+    padding: 10px;
+}
+.total-cost-number{
+    font-weight: bolder;
 }
 .card img {
 

@@ -8,6 +8,7 @@ import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.config.TemplateEngineUtil;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
+import org.w3c.dom.ls.LSOutput;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebListener;
@@ -21,10 +22,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+
+
 @WebServlet(urlPatterns = {"/checkout"})
 public class CheckoutController extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Cart cart = Cart.getInstance();
 
 
@@ -36,12 +39,13 @@ public class CheckoutController extends HttpServlet {
         context.setVariable("costOfCart",cart.getCostOfCart());
 
         engine.process("product/checkout.html", context, resp.getWriter());
-        System.out.println(cart.getCountedProduct());
+        System.out.println(cart.getAllProductsInCart());
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //req.getReader().lines().collect(Collectors.joining());
+
         String fullname = req.getParameter("fullname");
         String email = req.getParameter("email");
         String address = req.getParameter("address");
@@ -54,9 +58,7 @@ public class CheckoutController extends HttpServlet {
         String year = req.getParameter("year");
         String cvv = req.getParameter("cvv");
 
-        System.out.println(fullname + email + address + city + state + zip + cardname + cardnumber + month + year + cvv);
-
-
     }
+
 
 }

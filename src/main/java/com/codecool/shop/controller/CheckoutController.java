@@ -41,7 +41,21 @@ public class CheckoutController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getReader().lines().collect(Collectors.joining());
+        //req.getReader().lines().collect(Collectors.joining());
+        String fullname = req.getParameter("fullname");
+        String email = req.getParameter("email");
+        String address = req.getParameter("address");
+        String city = req.getParameter("city");
+        String state = req.getParameter("state");
+        String zip = req.getParameter("zip");
+        String cardname = req.getParameter("cardname");
+        String cardnumber = req.getParameter("cardnumber");
+        String month = req.getParameter("month");
+        String year = req.getParameter("year");
+        String cvv = req.getParameter("cvv");
+
+        System.out.println(fullname + email + address + city + state + zip + cardname + cardnumber + month + year + cvv);
+
 
     }
 

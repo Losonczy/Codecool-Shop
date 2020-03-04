@@ -10,9 +10,8 @@ public class Cart {
     private List<Product> productsInCart = new ArrayList<>();
     private static final Cart INSTANCE = new Cart();
 
-
     public void addProduct(Product product) {
-
+        CartItem cartItem = new CartItem();
         boolean isContain = false;
 
         for (Product value : productsInCart) {
@@ -22,6 +21,7 @@ public class Cart {
                 int quantity = value.getQuantity();
                 value.setDefaultPrice(price + product.getDefaultPrice());
                 value.setQuantity(quantity + 1);
+
             }
         }
         if(!isContain){
@@ -34,6 +34,7 @@ public class Cart {
         for(Product item: productsInCart){
             if(item.getId() == id){
                 item.setQuantity(quantity);
+
             }
         }
     }
@@ -79,6 +80,12 @@ public class Cart {
         }
         return count;
     }
+
+//    public int getCartPrices(){
+//        for(Product product: productsInCart){
+//           product.getQuantity() * product.
+//        }
+//    }
 
 
     public static Cart getInstance() {

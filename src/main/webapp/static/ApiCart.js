@@ -1,4 +1,4 @@
-let cartCounter = 0;
+let totalCost = 0;
 
 function addItemToCart() {
     let itemToCart = document.querySelectorAll(".toggle-button");
@@ -34,6 +34,7 @@ function getCartItems() {
     let cartButton = document.querySelector("#cart-button");
 
     cartButton.addEventListener('click', function () {
+        totalCost = 0;
         const body = document.querySelector('#container');
         body.innerHTML = "";
         getData("/apiGetCartData", loadCartData);
@@ -59,6 +60,7 @@ function loadCartData(cartItems) {
 
 
     for (let i = 0; i < cartItems.length; i++) {
+        totalCost += cartItems[i]['defaultPrice'] * cartItems[i]['quantity'];
         displayCartData(cartItems[i]);
     }
 }
@@ -67,6 +69,8 @@ function displayCartData(item) {
     const emptyP = document.querySelector('#empty');
     const body = document.querySelector('#container');
     const header = document.querySelector('.row-header');
+    const totalCostContainer = document.querySelector('.total-cost');
+    const displayTotalCost = totalCostContainer.querySelector('.total-cost-number');
 
     const template = document.querySelector('#cart-template');
     const clone = document.importNode(template.content, true);
@@ -84,7 +88,8 @@ function displayCartData(item) {
     const delete_button = clone.querySelector('#delete-img');
     delete_button.setAttribute('id', `delete_${item['id']}`);
 
-
+    totalCostContainer.style.display = "block";
+    displayTotalCost.innerText = totalCost;
     emptyP.textContent = "";
     header.style.display = "block";
     name.textContent = item["name"];
@@ -99,12 +104,19 @@ function displayCartData(item) {
 
 }
 function deleteItem(item){
+
+    const body = document.querySelector('#container');
+    const totalCostCounter = document.querySelector('.total-cost-number');
+    const emptyP = document.querySelector('#empty');
+    const header = document.querySelector('.row-header');
     const delete_button= document.getElementById(`delete_${item['id']}`);
     const itemContainer = document.getElementById(`body_${item['id']}`);
     delete_button.addEventListener('click',function () {
         let result = confirm("Are you sure you want to delete?");
         if (result) {
             itemContainer.remove();
+            totalCost -= item["defaultPrice"] * item["quantity"];
+            totalCostCounter.innerText = totalCost;
             postData('/deleteCartItem', {
                 "id": item.id,
             })
@@ -112,10 +124,13 @@ function deleteItem(item){
                     console.log(data);
                 });
         }
-    })
+
+    });
+
 }
 
 function quantityCounter(item) {
+    const totalCostCounter = document.querySelector('.total-cost-number');
     const plus = document.getElementById(`plus_${item['id']}`);
     const minus = document.getElementById(`minus_${item['id']}`);
     const counter = document.getElementById(`counter_${item['id']}`);
@@ -125,6 +140,9 @@ function quantityCounter(item) {
         if (item['quantity'] <= item['amount'] && item["quantity"] >= 1) {
             item['quantity'] += 1;
             price.textContent = item["defaultPrice"]*item['quantity'] + " USD";
+            totalCost += item["defaultPrice"]
+            totalCostCounter.innerText = totalCost;
+
 
             counter.setAttribute('value', `${item['quantity']}`);
             postData('/cartQuantity', {
@@ -144,6 +162,8 @@ function quantityCounter(item) {
             item['quantity'] -= 1;
             if (item["quantity"] >= 1) {
                 price.textContent = item["defaultPrice"]*item['quantity'] + " USD";
+                totalCost -= item["defaultPrice"];
+                totalCostCounter.innerText = totalCost;
             }
 
             counter.setAttribute('value', `${item['quantity']}`);

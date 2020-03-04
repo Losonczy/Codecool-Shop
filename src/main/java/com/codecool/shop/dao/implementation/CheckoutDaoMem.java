@@ -34,9 +34,19 @@ public class CheckoutDaoMem implements CheckoutDao {
     }
 
     @Override
-    public void add(CheckoutController checkoutController) throws SQLException {
-        String get = "INSERT INTO personal_data(full_name,email,address,city,zip) VALUES(?,?,?,?,?,?,?);";
+    public void add(ArrayList<String>data ) throws SQLException {
+        String get = "INSERT INTO personal_data(user_id,full_name,email,address,city,zip) VALUES(?,?,?,?,?,?);";
         PreparedStatement stmt = dataSource.getConnection().prepareStatement(get);
+
+        stmt.setInt(1,1);
+        stmt.setString(2,data.get(0));
+        stmt.setString(3,data.get(1));
+        stmt.setString(4,data.get(2));
+        stmt.setString(5,data.get(3));
+        stmt.setInt(6,Integer.parseInt(data.get(4)));
+
+        stmt.executeUpdate();
+
 
 
 

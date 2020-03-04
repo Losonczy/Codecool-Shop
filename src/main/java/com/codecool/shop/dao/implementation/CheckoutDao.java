@@ -4,6 +4,7 @@ import com.codecool.shop.controller.CheckoutController;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public interface CheckoutDao {
 
@@ -12,5 +13,5 @@ public interface CheckoutDao {
 
     void getDataSource(DataSource dataSource);
 
-    void add(CheckoutController checkoutController) throws SQLException;
+    void add(ArrayList<String>data) throws SQLException;
 }

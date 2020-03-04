@@ -56,12 +56,12 @@ public class ProductCategoryDaoMem implements ProductCategoryDao {
 
         stmt.setInt(1,id);
         ResultSet res =  stmt.executeQuery();
-        ProductCategory category = null;
-        if(res.next()){
-            category = new ProductCategory(res.getInt("id"),res.getString("name"),res.getString("department"),res.getString("description"));
 
+        if(res.next()){
+            ProductCategory category = new ProductCategory(res.getInt("id"),res.getString("name"),res.getString("department"),res.getString("description"));
+            return category;
         }
-        return category;
+        return null;
     }
 
     @Override

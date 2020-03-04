@@ -8,15 +8,18 @@ public class Product extends BaseModel {
     transient private Currency defaultCurrency;
     transient private ProductCategory productCategory;
     transient private Supplier supplier;
+    private int quantity;
 
 
-    public Product(int id, String name, float defaultPrice, String currencyString, String description, ProductCategory productCategory, Supplier supplier,int amount) {
+    public Product(int id, String name, float defaultPrice, String currencyString, String description, ProductCategory productCategory, Supplier supplier,int amount,int quantity) {
         super(id, name, description);
 
         this.setPrice(defaultPrice, currencyString);
         this.setSupplier(supplier);
         this.setProductCategory(productCategory);
         this.setAmount(amount);
+        this.setQuantity(quantity);
+
     }
 
     public float getDefaultPrice() {
@@ -78,4 +81,11 @@ public class Product extends BaseModel {
                 this.supplier.getName());
     }
 
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 }

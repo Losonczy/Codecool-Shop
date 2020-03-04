@@ -356,32 +356,36 @@ h1 {
     padding: 0 2px;
     min-width: 35px;
     text-align: center;
+
 }
 
 .qty .plus {
     cursor: pointer;
     display: inline-block;
     vertical-align: center;
-    color: white;
-    width: 20px;
-    height: 20px;
-    font: 18px/1 Arial, sans-serif;
+    align-content: center;
+    color: #404040;
+    width: 30px;
+    height: 30px;
+    font: 24px Arial, sans-serif;
     text-align: center;
-    border-radius: 50%;
     background-clip: padding-box;
+    border: 1px solid #404040;
+
 }
 
 .qty .minus {
     cursor: pointer;
     display: inline-block;
     vertical-align: center;
-    color: white;
-    width: 20px;
-    height: 20px;
-    font: 18px/1 Arial, sans-serif;
+    justify-content: center;
+    color: #404040;
+    width: 30px;
+    height: 30px;
+    font: 24px Arial, sans-serif;
     text-align: center;
-    border-radius: 50%;
     background-clip: padding-box;
+    border: 1px solid #404040;
 }
 .mt-5{
     margin: 2px !important;
@@ -391,11 +395,13 @@ div {
 }
 
 .minus:hover {
-    background-color: #0fb0bb !important;
+    background-color: #e0e0e0 !important;
+    border-color: #E0E0E0;
 }
 
 .plus:hover {
-    background-color: #0fb0bb !important;
+    background-color: #e0e0e0 !important;
+    border-color:#E0E0E0;
 }
 
 /*Prevent text selection*/

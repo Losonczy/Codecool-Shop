@@ -8,6 +8,8 @@ import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
 
+import com.codecool.shop.dao.SupplierDao;
+import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import org.postgresql.ds.PGSimpleDataSource;
 
 
@@ -22,6 +24,9 @@ public class Connection {
         //productDaoMem.add(new Product(11,"Test",10,"USD","desc",new ProductCategory("test","asd","desc"),new Supplier("name","desc"),1));
         System.out.println(productDaoMem.find(3));
 
+        SupplierDaoMem supplierDaoMem = SupplierDaoMem.getInstance();
+        supplierDaoMem.setDataSource(dataSource);
+        System.out.println(supplierDaoMem.getAll());
     }
 
     private DataSource connect() throws SQLException {
@@ -30,6 +35,7 @@ public class Connection {
         dataSource.setDatabaseName("webshop");
         dataSource.setUser("losonczy");
         dataSource.setPassword("1234");
+
 
         dataSource.getConnection().close();
 

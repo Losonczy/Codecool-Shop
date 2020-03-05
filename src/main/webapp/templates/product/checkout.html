@@ -120,33 +120,34 @@
                         </label>
                         <input type="submit" value="Continue to checkout" class="btn" name="submit">
                     </form>
+                    <a href="/"><button class="back">Back to shopping</button></a>
                 </div>
             </div>
 
             <div class="col-25">
                 <div class="container">
-                    <h4>Cart
+                    <h3>Cart
                         <span class="price" style="color:black">
           <i class="fa fa-shopping-cart" th:text="'     '+${quantityOfItems}"></i>
         </span>
-                    </h4>
+                    </h3>
                     <div id="itemsInCart" class="row">
                         <div th:each="prod,iterStat : ${itemsInCart.keySet()}">
                             <div class="items" th:attr="data-label=${prod.getName()}">
-                                <p><div th:text="'Quantity:    '+${itemsInCart.get(prod)}"></div>
-                                    <img src="http://placehold.it/300x300/000/fff"
+                                <p><div class="quantity" th:text="'Quantity:    '+${itemsInCart.get(prod)}"></div>
+                                    <img class="cart-img" src="http://placehold.it/300x300/000/fff"
                                         th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt=""
                                         style="width: 40%"/>
                                 </p>
                             </div>
                         </div>
                     </div>
-
-                    <p>Total <span class="price" style="color:black" th:text="${costOfCart}+' $'"></span></p>
                 </div>
+                <p class="cost-container">Total <span class="price" style="color:black" th:text="${costOfCart}+' $'"></span></p>
+
             </div>
         </div>
-        <a href="/"><button class="back">Back to shopping</button></a>
+
     </div>
 </div>
 </body>

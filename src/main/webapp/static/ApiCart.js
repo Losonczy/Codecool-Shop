@@ -111,6 +111,8 @@ function deleteItem(item){
     const header = document.querySelector('.row-header');
     const delete_button= document.getElementById(`delete_${item['id']}`);
     const itemContainer = document.getElementById(`body_${item['id']}`);
+    const totalCostContainer = document.querySelector('.total-cost');
+
     delete_button.addEventListener('click',function () {
         let result = confirm("Are you sure you want to delete?");
         if (result) {
@@ -123,9 +125,16 @@ function deleteItem(item){
                 .then((data) => {
                     console.log(data);
                 });
+            const row  = document.querySelectorAll('.cart-row');
+            if(row.length == 0){
+                emptyP.textContent = "The cart is empty";
+                header.style.display = "none";
+                totalCostContainer.style.display = "none";
+            }
         }
 
     });
+
 
 }
 

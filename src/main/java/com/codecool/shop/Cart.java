@@ -65,11 +65,7 @@ public class Cart {
     public HashMap<Product, Integer> getCountedProduct() {
         HashMap<Product, Integer> countedProducts = new HashMap<>();
         for (Product product : productsInCart) {
-            if (countedProducts.containsKey(product)) {
-                countedProducts.replace(product, countedProducts.get(product) + 1);
-            } else {
-                countedProducts.put(product, 1);
-            }
+            countedProducts.put(product, product.getQuantity());
         }
         return countedProducts;
     }
@@ -84,10 +80,13 @@ public class Cart {
     }
 
     public int getCountOfCart() {
-        HashMap<Product, Integer> countedProducts = getCountedProduct();
+//        HashMap<Product, Integer> countedProducts = getCountedProduct();
         int count = 0;
-        for (Product product : countedProducts.keySet()) {
-            count += (countedProducts.get(product));
+//        for (Product product : countedProducts.keySet()) {
+//            count += (countedProducts.get(product));
+//        }
+        for(Product item: productsInCart){
+            count += item.getQuantity();
         }
         return count;
     }

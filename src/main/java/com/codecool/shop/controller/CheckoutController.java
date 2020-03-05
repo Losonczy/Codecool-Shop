@@ -59,12 +59,15 @@ public class CheckoutController extends HttpServlet {
         String city = req.getParameter("city");
         String state = req.getParameter("state");
         String zip = req.getParameter("zip");
+        context.setVariable("name",fullname);
+        context.setVariable("email",email);
+        context.setVariable("adress",address);
+        context.setVariable("city",city);
+        context.setVariable("zip",zip);
+        context.setVariable("quantity", cart.getCountedProduct());
+        context.setVariable("total", cart.getCostOfCart());
 
-       /* String cardname = req.getParameter("cardname");
-        String cardnumber = req.getParameter("cardnumber");
-        String month = req.getParameter("month");
-        String year = req.getParameter("year");
-        String cvv = req.getParameter("cvv");*/
+
 
         ArrayList<String> personal_data = new ArrayList<>();
         personal_data.add(fullname);
@@ -101,6 +104,7 @@ public class CheckoutController extends HttpServlet {
             e.printStackTrace();
         }
         engine.process("product/payment.html", context, resp.getWriter());
+        cart.emptyCart();
     }
 
 

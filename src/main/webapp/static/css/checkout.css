@@ -111,11 +111,28 @@ input[type=text] {
     justify-content: center;
     align-content: center;
     background-color: white;
+    text-align: center;
+    font-size: 20px;
+}
+.name{
+    margin: 0 5px;
+    color:#1e6377;
+    font-weight: bold;
+    font-style: italic;
+
+}
+.thanks{
+    width: 200px;
+    margin: 0 auto;
+}
+.email{
+    margin: 0 5px;
+    color: #188a61;
+    font-weight: bold;
+    font-style: italic;
 }
 
-#paypal-button-container {
-    width: 50%;
-}
+
 .paypal-logo{
     font-family: Verdana, Tahoma;
     font-weight: bold;

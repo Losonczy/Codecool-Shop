@@ -91,6 +91,9 @@ public class Cart {
         }
         return count;
     }
+    public void emptyCart(){
+        productsInCart.clear();
+    }
 
     public static Cart getInstance() {
         return INSTANCE;

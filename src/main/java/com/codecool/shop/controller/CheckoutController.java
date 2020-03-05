@@ -49,6 +49,9 @@ public class CheckoutController extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //req.getReader().lines().collect(Collectors.joining());
+        TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
+        WebContext context = new WebContext(req, resp, req.getServletContext());
+
 
         String fullname = req.getParameter("fullname");
         String email = req.getParameter("email");
@@ -97,6 +100,7 @@ public class CheckoutController extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        engine.process("product/payment.html", context, resp.getWriter());
     }
 
 

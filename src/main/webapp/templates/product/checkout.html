@@ -32,7 +32,7 @@
     <!--    <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>-->
     <link rel="stylesheet" type="text/css" href="/static/css/checkout.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="/static/ApiCart.js" defer></script>
+    <script src="/static/js/checkout.js" defer></script>
 </head>
 <body>
 <div id="content">
@@ -45,9 +45,10 @@
 
                         <div class="row">
                             <div class="col-50">
-                                <h3>Billing Address</h3>
+                                <h3>Shipping Address</h3>
                                 <label for="fname"><i class="fa fa-user"></i> Full Name</label>
-                                <input type="text" id="fname" name="fullname" minlength="5" placeholder="John M. Doe" required>
+                                <input type="text" id="fname" name="fullname" minlength="5" placeholder="John M. Doe"
+                                       required>
                                 <label for="email"><i class="fa fa-envelope"></i> Email</label>
                                 <input type="text" id="email" name="email" placeholder="john@example.com" required>
                                 <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
@@ -67,60 +68,77 @@
                                 </div>
                             </div>
 
-                            <div class="col-50">
-                                <h3>Payment</h3>
-                                <label for="fname">Accepted Cards</label>
-                                <div class="icon-container">
-                                    <i class="fa fa-cc-visa" style="color:navy;"></i>
-                                    <i class="fa fa-cc-amex" style="color:blue;"></i>
-                                    <i class="fa fa-cc-mastercard" style="color:red;"></i>
-                                    <i class="fa fa-cc-paypal" style="color:orange;"></i>
-                                </div>
-                                <label for="cname">Name on Card</label>
-                                <input type="text" id="cname" name="cardname" placeholder="John More Doe" required>
-                                <label for="ccnum">Credit card number</label>
-                                <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444" required>
-                                <div class="form-group" id="expiration-date">
-                                    <label>Expiration Date</label>
-                                    <select name="month" required>
-                                        <option value="01">January</option>
-                                        <option value="02">February</option>
-                                        <option value="03">March</option>
-                                        <option value="04">April</option>
-                                        <option value="05">May</option>
-                                        <option value="06">June</option>
-                                        <option value="07">July</option>
-                                        <option value="08">August</option>
-                                        <option value="09">September</option>
-                                        <option value="10">October</option>
-                                        <option value="11">November</option>
-                                        <option value="12">December</option>
-                                    </select>
-                                    <select name="year" required>
-                                        <option value="21"> 2021</option>
-                                        <option value="22"> 2022</option>
-                                        <option value="23"> 2023</option>
-                                        <option value="24"> 2024</option>
-                                        <option value="25"> 2025</option>
-                                        <option value="26"> 2026</option>
-                                    </select>
-                                </div>
+                            <!--                            <div class="col-50">-->
+                            <!--                                <h3>Payment</h3>-->
+                            <!--                                <label for="fname">Accepted Cards</label>-->
+                            <!--                                <div class="icon-container">-->
+                            <!--                                    -->
+                            <!--&lt;!&ndash;                                    <i class="fa fa-cc-visa" style="color:navy;"></i>&ndash;&gt;-->
+                            <!--&lt;!&ndash;                                    <i class="fa fa-cc-amex" style="color:blue;"></i>&ndash;&gt;-->
+                            <!--&lt;!&ndash;                                    <i class="fa fa-cc-mastercard" style="color:red;"></i>&ndash;&gt;-->
+                            <!--&lt;!&ndash;                                    <i class="fa fa-cc-paypal" style="color:orange;"></i>&ndash;&gt;-->
+                            <!--                                 -->
 
-                                <div class="row">
-                                    <div class="col-50">
-                                        <label for="cvv">CVV</label>
-                                        <input type="text" id="cvv" name="cvv" placeholder="352" required>
-                                    </div>
-                                </div>
-                            </div>
+                            <!--                                </div>-->
+                            <!--                                <label for="cname">Name on Card</label>-->
+                            <!--                                <input type="text" id="cname" name="cardname" placeholder="John More Doe" required>-->
+                            <!--                                <label for="ccnum">Credit card number</label>-->
+                            <!--                                <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444" required>-->
+                            <!--                                <div class="form-group" id="expiration-date">-->
+                            <!--                                    <label>Expiration Date</label>-->
+                            <!--                                    <select name="month" required>-->
+                            <!--                                        <option value="01">January</option>-->
+                            <!--                                        <option value="02">February</option>-->
+                            <!--                                        <option value="03">March</option>-->
+                            <!--                                        <option value="04">April</option>-->
+                            <!--                                        <option value="05">May</option>-->
+                            <!--                                        <option value="06">June</option>-->
+                            <!--                                        <option value="07">July</option>-->
+                            <!--                                        <option value="08">August</option>-->
+                            <!--                                        <option value="09">September</option>-->
+                            <!--                                        <option value="10">October</option>-->
+                            <!--                                        <option value="11">November</option>-->
+                            <!--                                        <option value="12">December</option>-->
+                            <!--                                    </select>-->
+                            <!--                                    <select name="year" required>-->
+                            <!--                                        <option value="21"> 2021</option>-->
+                            <!--                                        <option value="22"> 2022</option>-->
+                            <!--                                        <option value="23"> 2023</option>-->
+                            <!--                                        <option value="24"> 2024</option>-->
+                            <!--                                        <option value="25"> 2025</option>-->
+                            <!--                                        <option value="26"> 2026</option>-->
+                            <!--                                    </select>-->
+                            <!--                                </div>-->
+
+                            <!--                                <div class="row">-->
+                            <!--                                    <div class="col-50">-->
+                            <!--                                        <label for="cvv">CVV</label>-->
+                            <!--                                        <input type="text" id="cvv" name="cvv" placeholder="352" required>-->
+                            <!--                                    </div>-->
+                            <!--                                </div>-->
+                            <!--                            </div>-->
 
                         </div>
                         <label>
                             <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
                         </label>
-                        <input type="submit" value="Continue to checkout" class="btn" name="submit">
+                        <div id="paypal-button-container">
+                            <a class="payment-btn"
+                               href="https://www.sandbox.paypal.com/checkoutnow?sessionID=337638c3fb_mtq6mta6nta&buttonSessionID=c7f5871b04_mtq6mtq6ntc&fundingSource=paypal&buyerCountry=HU&locale.x=hu_HU&commit=true&clientID=AZDxjDScFpQtjWTOUtWKbyN_bDt4OgqaF4eYXlewfBP4-8aqX3PiV8e1GWU6liB2CUXlkA59kJXE7M6R&env=sandbox&sdkMeta=eyJ1cmwiOiJodHRwczovL3d3dy5wYXlwYWwuY29tL3Nkay9qcz9jbGllbnQtaWQ9c2IiLCJzdGFnZUhvc3QiOm51bGwsImFwaVN0YWdlSG9zdCI6bnVsbH0&xcomponent=1&version=5.0.106&token=1F136106NN669632E"
+                               target="_blank">
+                                <span class="paypal-button">
+                                    <span class="paypal-logo">
+                                        <i>Pay</i><i>Pal</i>
+                                    </span>
+                                </span>
+                            </a>
+                        </div>
+                        <input id="confirm" type="submit" value="Continue to checkout" class="btn" name="submit"
+                               disabled>
                     </form>
-                    <a href="/"><button class="back">Back to shopping</button></a>
+                    <a href="/">
+                        <button class="back">Back to shopping</button>
+                    </a>
                 </div>
             </div>
 
@@ -134,21 +152,44 @@
                     <div id="itemsInCart" class="row">
                         <div th:each="prod,iterStat : ${itemsInCart.keySet()}">
                             <div class="items" th:attr="data-label=${prod.getName()}">
-                                <p><div class="quantity" th:text="'Quantity:    '+${itemsInCart.get(prod)}"></div>
-                                    <img class="cart-img" src="http://placehold.it/300x300/000/fff"
-                                        th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt=""
-                                        style="width: 40%"/>
+                                <p>
+                                <div class="quantity" th:text="'Quantity:    '+${itemsInCart.get(prod)}"></div>
+                                <img class="cart-img" src="http://placehold.it/300x300/000/fff"
+                                     th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt=""
+                                     style="width: 40%"/>
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <p class="cost-container">Total <span class="price" style="color:black" th:text="${costOfCart}+' $'"></span></p>
+                <p class="cost-container">Total <span class="price" style="color:black"
+                                                      th:text="${costOfCart}+' $'"></span></p>
 
             </div>
         </div>
 
     </div>
 </div>
+<!--<script src="https://www.paypal.com/sdk/js?client-id=sb"></script>-->
+<!--<script>-->
+<!--    paypal.Buttons().render('#paypal-button-container');-->
+<!--    paypal.Buttons().render({funding: {-->
+<!--            allowed: [ paypal.FUNDING.CREDIT ]-->
+<!--        }-->
+
+<!--    })-->
+<!--</script>-->
 </body>
 </html>
+<!--{-->
+
+<!--env: 'production',-->
+
+<!--locale: 'en_US',-->
+
+<!--style: {-->
+<!--size: 'small',-->
+<!--color: 'gold',-->
+<!--shape: 'pill',-->
+<!--label: 'checkout'-->
+<!--},-->

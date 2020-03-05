@@ -52,4 +52,16 @@ public class CheckoutDaoMem implements CheckoutDao {
 
     }
 
+    @Override
+    public void addToHistory(ArrayList<String> items)throws SQLException{
+        String get = " INSERT INTO cart(user_id,product_list,total_cost) VALUES(?,?,?);";
+        PreparedStatement stmt = dataSource.getConnection().prepareStatement(get);
+
+        stmt.setInt(1,1);
+        stmt.setString(2,items.get(0));
+        stmt.setInt(3,Integer.parseInt(items.get(1)));
+
+        stmt.executeUpdate();
+    }
+
 }

@@ -3,6 +3,7 @@ package com.codecool.shop;
 import com.codecool.shop.model.Product;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 

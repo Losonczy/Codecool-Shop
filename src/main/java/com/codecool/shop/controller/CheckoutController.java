@@ -10,6 +10,7 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 import org.w3c.dom.ls.LSOutput;
 import com.codecool.shop.dao.implementation.CheckoutDaoMem;
+import com.codecool.shop.model.Product;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebListener;
@@ -26,21 +27,20 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 
-
 @WebServlet(urlPatterns = {"/checkout"})
 public class CheckoutController extends HttpServlet {
     Cart cart = Cart.getInstance();
+
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
 
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
-        context.setVariable("itemsInCart",cart.getCountedProduct());
-        context.setVariable("quantityOfItems",cart.getCountOfCart());
-        context.setVariable("costOfCart",cart.getCostOfCart());
+        context.setVariable("itemsInCart", cart.getCountedProduct());
+        context.setVariable("quantityOfItems", cart.getCountOfCart());
+        context.setVariable("costOfCart", cart.getCostOfCart());
 
         engine.process("product/checkout.html", context, resp.getWriter());
     }
@@ -75,6 +75,27 @@ public class CheckoutController extends HttpServlet {
             e.printStackTrace();
         }
 
+        ArrayList<String> items = new ArrayList<>();
+
+        String purchasedItems = "";
+        for (Product item : cart.getAllProductsInCart()) {
+            if (cart.getAllProductsInCart().indexOf(item) == cart.getAllProductsInCart().size() - 1) {
+                purchasedItems += String.valueOf(item.getId());
+            } else {
+                purchasedItems += String.valueOf(item.getId()) + ",";
+
+            }
+        }
+        items.add(purchasedItems);
+        items.add(String.valueOf(cart.getCostOfCart()));
+
+        System.out.println(items);
+
+        try {
+            CheckoutDaoMem.getInstance().addToHistory(items);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 

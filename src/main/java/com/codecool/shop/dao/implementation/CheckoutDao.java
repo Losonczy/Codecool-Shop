@@ -13,5 +13,7 @@ public interface CheckoutDao {
 
     void getDataSource(DataSource dataSource);
 
-    void add(ArrayList<String>data) throws SQLException;
+    void add(ArrayList<String> data) throws SQLException;
+
+    void addToHistory(ArrayList<String> items) throws SQLException;
 }

@@ -29,9 +29,10 @@ import java.util.stream.Collectors;
 
 @WebServlet(urlPatterns = {"/checkout"})
 public class CheckoutController extends HttpServlet {
+    Cart cart = Cart.getInstance();
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Cart cart = Cart.getInstance();
+
 
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
@@ -42,7 +43,6 @@ public class CheckoutController extends HttpServlet {
         context.setVariable("costOfCart",cart.getCostOfCart());
 
         engine.process("product/checkout.html", context, resp.getWriter());
-        System.out.println(cart.getAllProductsInCart());
     }
 
     @Override
@@ -74,7 +74,6 @@ public class CheckoutController extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
 
     }
 

@@ -14,10 +14,9 @@ import org.thymeleaf.context.WebContext;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
 
 @WebServlet(urlPatterns = {"/login"})
@@ -46,13 +45,21 @@ public class Login extends HttpServlet {
 
         PasswordHashing demo = new PasswordHashing();
 
+        HttpSession session = req.getSession();
+
+
         try {
             if(demo.login(username,password)){
                 context.setVariable("isLogin", "true");
+                session.setAttribute("username",username);
+                session.setAttribute("pw",password);
+
+                System.out.println("session name: "+session.getAttribute("username"));
                 System.out.println("Successful login");
             }else{
                 context.setVariable("isLogin", "false");
                 System.out.println("Unsuccessful login");
+                session.invalidate();
             }
         } catch (SQLException e) {
             e.printStackTrace();

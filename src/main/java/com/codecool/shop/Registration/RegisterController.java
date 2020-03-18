@@ -46,13 +46,14 @@ public class RegisterController extends HttpServlet {
 
         User user = new User(username, password);
         try {
-            if (registration.Validate(user)) {
+            if (!registration.Validate(user)) {
                 registration.add(user);
                 context.setVariable("isValid", "true");
             }else{
                 context.setVariable("isValid", "false");
 
             }
+
             engine.process("product/index.html", context, resp.getWriter());
         } catch (SQLException e) {
             e.printStackTrace();

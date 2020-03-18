@@ -32,7 +32,9 @@ public class PasswordHashing {
         String saltedPassword = SALT + password;
         String hashedPassword = generateHash(saltedPassword);
 
-        String storedPasswordHash = registration.find(username).getUsername();;
+        String storedPasswordHash = registration.find(username).getPassword();
+        System.out.println(hashedPassword);
+        System.out.println(storedPasswordHash);
         if (hashedPassword.equals(storedPasswordHash)) {
             isAuthenticated = true;
         } else {

@@ -200,6 +200,11 @@ h1 {
     color: #65c697;
     margin-bottom:0;
 }
+.alert{
+    max-width: 80%;
+    font-size: 12px !important;
+    margin: 0px auto;
+}
 
 .login-submit:hover{
     background-color: #282828;

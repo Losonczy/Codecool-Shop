@@ -14,7 +14,8 @@ public class PasswordHashing {
     RegisterDao registration = RegisterDaoMem.getINSTANCE();
     public static final String SALT = "my-salt-text";
 
-    public PasswordHashing(){}
+    public PasswordHashing() {
+    }
 
     public void signup(String username, String password) throws SQLException {
         String saltedPassword = SALT + password;
@@ -32,15 +33,21 @@ public class PasswordHashing {
         String saltedPassword = SALT + password;
         String hashedPassword = generateHash(saltedPassword);
 
-        String storedPasswordHash = registration.find(username).getPassword();
-        System.out.println(hashedPassword);
-        System.out.println(storedPasswordHash);
-        if (hashedPassword.equals(storedPasswordHash)) {
-            isAuthenticated = true;
-        } else {
-            isAuthenticated = false;
+        try {
+            String storedPasswordHash = registration.find(username).getPassword();
+            System.out.println(hashedPassword);
+            System.out.println(storedPasswordHash);
+            if (hashedPassword.equals(storedPasswordHash)) {
+                isAuthenticated = true;
+            } else {
+                isAuthenticated = false;
+            }
+            return isAuthenticated;
+        } catch (NullPointerException ex) {
+            return false;
         }
-        return isAuthenticated;
+
+
     }
 
     public static String generateHash(String input) {

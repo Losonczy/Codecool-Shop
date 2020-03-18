@@ -59,14 +59,13 @@ public class CheckoutController extends HttpServlet {
         String city = req.getParameter("city");
         String state = req.getParameter("state");
         String zip = req.getParameter("zip");
-        context.setVariable("name",fullname);
-        context.setVariable("email",email);
-        context.setVariable("adress",address);
-        context.setVariable("city",city);
-        context.setVariable("zip",zip);
+        context.setVariable("name", fullname);
+        context.setVariable("email", email);
+        context.setVariable("adress", address);
+        context.setVariable("city", city);
+        context.setVariable("zip", zip);
         context.setVariable("quantity", cart.getCountedProduct());
         context.setVariable("total", cart.getCostOfCart());
-
 
 
         ArrayList<String> personal_data = new ArrayList<>();

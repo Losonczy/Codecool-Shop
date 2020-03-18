@@ -21,9 +21,6 @@ public class Connection {
 
         ProductDaoMem productDaoMem= ProductDaoMem.getInstance();
         productDaoMem.setDataSource(dataSource);
-        System.out.println(productDaoMem.getAll());
-        //productDaoMem.add(new Product(11,"Test",10,"USD","desc",new ProductCategory("test","asd","desc"),new Supplier("name","desc"),1));
-        System.out.println(productDaoMem.find(3));
 
         SupplierDaoMem supplierDaoMem = SupplierDaoMem.getInstance();
         supplierDaoMem.setDataSource(dataSource);

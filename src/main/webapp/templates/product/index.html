@@ -40,8 +40,47 @@
     <!-- Sidebar -->
     <nav id="sidebar">
         <div class="sidebar-header">
+            <h3>Navigation</h3>
+            <a data-toggle="collapse" href="#login" role="button"
+               aria-expanded="false" aria-controls="collapseExample">
+                <button class="registration">Log in</button>
+            </a>
+            <div class="collapse" id="login">
+                <div class="card card-body nav-card-body">
+                    <form class="login-form" action="/">
+                        <input class="login" type="text" id="username" name="username" placeholder="Username" required
+                               minlength="5" autocomplete="off"><br>
+                        <input class="login" type="password" id="password" name="password" placeholder="Password"
+                               required
+                               minlength="5"><br><br>
+                        <input class="login-submit" type="submit" value="Submit">
+                    </form>
+                </div>
+            </div>
+            <a data-toggle="collapse" href="#registration" role="button"
+               aria-expanded="false" aria-controls="collapseExample">
+                <button class="registration">Registration</button>
+            </a>
+            <div class="collapse" id="registration">
+                <div class="card card-body nav-card-body">
+                    <form class="login-form" action="/">
+                        <input class="login" type="text" id="uname" name="uname" placeholder="Username" required
+                               minlength="5" autocomplete="off"><br>
+                        <input class="login" type="password" id="pword" name="pword" placeholder="Password"
+                               required minlength="5"><br><br>
+                        <input class="login" type="email" id="email" name="email" placeholder="E-mail"
+                               required minlength="7"><br><br>
+                        <input class="login-submit" type="submit" value="Submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="sidebar-header">
             <h3>Categories</h3>
         </div>
+
 
         <ul class="list-unstyled components">
             <li>

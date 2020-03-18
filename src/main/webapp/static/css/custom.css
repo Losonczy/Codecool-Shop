@@ -68,6 +68,7 @@ a[data-toggle="collapse"] {
     background: #404040;
     alignment: center;
     color: #E9E861;
+    width: 100%;
 }
 
 #sidebar ul.components {
@@ -148,6 +149,72 @@ h1 {
 .modal-title{
     font-family: 'Oswald', sans-serif;
     color:#eeeeee;
+}
+.login-form{
+    margin: 30px auto;
+}
+.login-form label{
+    color: #0FB0BB;
+}
+
+.login{
+    background-color: #323232;
+    border:none;
+    padding: 10px;
+    border-radius: 15px;
+    width: 100%;
+    color: #65c697;
+    margin: 10px 0;
+}
+.registration{
+    background-color: #323232;
+    border:none;
+    padding: 10px;
+    border-radius: 15px;
+    width: 100%;
+    color: #65c697;
+    margin:10px 0;
+
+}
+.card {
+    margin:0;
+    padding: 0;
+}
+.card .login-form{
+    margin:0;
+    padding: 0;
+}
+
+.nav-card-body{
+    background-color: transparent !important;
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+.login-submit{
+    background-color: #4a4a4a;
+    border:none;
+    padding: 10px;
+    border-radius: 15px;
+
+    color: #65c697;
+    margin-bottom:0;
+}
+
+.login-submit:hover{
+    background-color: #282828;
+    color: #E9E861;
+    transition: 0.2s;
+    cursor: pointer;
+}
+.registration:hover{
+    background-color: #282828;
+    color: #E9E861;
+    transition: 0.2s;
+    cursor: pointer;
+}
+*:focus {
+    outline: none;
 }
 
 .modal-close{
@@ -447,17 +514,17 @@ span {
     -ms-user-select: none;
 }
 
-input {
-    border: 0;
-    width: 2%;
-}
+/*input {*/
+/*    border: 0;*/
+/*    width: 2%;*/
+/*}*/
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
+/*input::-webkit-outer-spin-button,*/
+/*input::-webkit-inner-spin-button {*/
+/*    -webkit-appearance: none;*/
+/*    margin: 0;*/
+/*}*/
 
-input:disabled {
-    background-color: white;
-}
+/*input:disabled {*/
+/*    background-color: white;*/
+/*}*/

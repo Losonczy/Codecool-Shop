@@ -15,14 +15,7 @@ public class User {
 
     public User(String username, String password) {
         this.username = username;
-        this.password = hashPassword(password);
-    }
-
-    public String hashPassword(String password) {
-        return "Hashed password";
-    }
-    public String decodePassword(){
-        return "decoded password";
+        this.password = password;
     }
 
     public String getUsername() {

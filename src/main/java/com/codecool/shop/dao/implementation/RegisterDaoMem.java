@@ -42,10 +42,10 @@ public class RegisterDaoMem implements RegisterDao {
     }
 
     @Override
-    public User find(int id) throws SQLException {
-        String qr = "SELECT * FROM users WHERE id=?";
+    public User find(String username) throws SQLException {
+        String qr = "SELECT * FROM users WHERE username=?";
         PreparedStatement stmt = dataSource.getConnection().prepareStatement(qr);
-        stmt.setInt(1, id);
+        stmt.setString(1, username);
 
         ResultSet res = stmt.executeQuery();
 
@@ -58,6 +58,7 @@ public class RegisterDaoMem implements RegisterDao {
 
     @Override
     public boolean Validate(User user) throws SQLException {
+
         String qr = "SELECT * FROM users WHERE username=? AND password=?";
         PreparedStatement stmt = dataSource.getConnection().prepareStatement(qr);
         stmt.setString(1, user.getUsername());
@@ -65,6 +66,8 @@ public class RegisterDaoMem implements RegisterDao {
 
         ResultSet res = stmt.executeQuery();
         return res.next();
+
+
 
     }
 

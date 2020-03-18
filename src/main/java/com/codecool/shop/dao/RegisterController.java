@@ -1,4 +1,4 @@
-package com.codecool.shop.Registration;
+package com.codecool.shop.dao;
 
 import com.codecool.shop.Cart;
 import com.codecool.shop.User;
@@ -6,6 +6,7 @@ import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.RegisterDao;
+import com.codecool.shop.dao.implementation.PasswordHashing;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.RegisterDaoMem;
@@ -44,21 +45,21 @@ public class RegisterController extends HttpServlet {
         String username = req.getParameter("uname");
         String password = req.getParameter("pword");
 
-        User user = new User(username, password);
+        PasswordHashing demo = new PasswordHashing();
+
         try {
-            if (!registration.Validate(user)) {
-                registration.add(user);
+            if (registration.find(username) == null) {
+                demo.signup(username, password);
                 context.setVariable("isValid", "true");
             }else{
                 context.setVariable("isValid", "false");
-
             }
 
-            engine.process("product/index.html", context, resp.getWriter());
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
+        engine.process("product/index.html", context, resp.getWriter());
 
     }
 }

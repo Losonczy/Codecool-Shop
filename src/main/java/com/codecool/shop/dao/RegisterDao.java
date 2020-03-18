@@ -10,7 +10,7 @@ public interface RegisterDao {
 
     void add(User user) throws SQLException;
 
-    User find(int id) throws SQLException;
+    User find(String username) throws SQLException;
     boolean Validate(User user) throws SQLException;
 
     void remove(int id) throws SQLException;

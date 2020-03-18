@@ -46,6 +46,7 @@
                 <button class="registration">Log in</button>
             </a>
             <div class="collapse" id="login">
+
                 <div class="card card-body nav-card-body">
                     <form class="login-form" action="/login" method="post">
                         <input class="login" type="text" id="username" name="username" placeholder="Username" required
@@ -75,6 +76,20 @@
                 </div>
             </div>
         </div>
+        <div class="alert alert-success" role="alert" th:if="${isValid == 'true'}">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            Successful Registration
+        </div>
+        <div class="alert alert-danger" role="alert" th:if="${isValid == 'false'}">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            Wrong username or e-mail address!
+        </div>
+
+
 
 
         <div class="sidebar-header">

@@ -28,8 +28,6 @@ public class PasswordHashing {
     public Boolean login(String username, String password) throws SQLException {
         Boolean isAuthenticated = false;
 
-        // remember to use the same SALT value use used while storing password
-        // for the first time.
         String saltedPassword = SALT + password;
         String hashedPassword = generateHash(saltedPassword);
 
@@ -64,7 +62,7 @@ public class PasswordHashing {
                 hash.append(digits[b & 0x0f]);
             }
         } catch (NoSuchAlgorithmException e) {
-            // handle error here.
+            System.out.println("No such algorithm");
         }
 
         return hash.toString();

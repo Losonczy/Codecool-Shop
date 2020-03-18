@@ -131,7 +131,12 @@ input[type=text] {
     font-weight: bold;
     font-style: italic;
 }
-
+.notification{
+    display: block;
+}
+.notification-hidden{
+    display: none;
+}
 
 .paypal-logo{
     font-family: Verdana, Tahoma;

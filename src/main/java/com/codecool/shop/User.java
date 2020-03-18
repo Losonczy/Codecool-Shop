@@ -19,7 +19,10 @@ public class User {
     }
 
     public String hashPassword(String password) {
-        return password + "Hash the password here please";
+        return "Hashed password";
+    }
+    public String decodePassword(){
+        return "decoded password";
     }
 
     public String getUsername() {

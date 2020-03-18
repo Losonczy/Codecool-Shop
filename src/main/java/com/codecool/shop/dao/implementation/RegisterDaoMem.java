@@ -35,8 +35,8 @@ public class RegisterDaoMem implements RegisterDao {
     public void add(User user) throws SQLException {
         String qr = "INSERT INTO users(id,username,password) VALUES (DEFAULT,?,?) RETURNING id";
         PreparedStatement stmt = dataSource.getConnection().prepareStatement(qr);
-        stmt.setString(1,user.getUsername());
-        stmt.setString(2,user.getPassword());
+        stmt.setString(1, user.getUsername());
+        stmt.setString(2, user.getPassword());
         ResultSet rs = stmt.executeQuery();
         rs.next();
         user.setId(rs.getInt(1));
@@ -44,25 +44,41 @@ public class RegisterDaoMem implements RegisterDao {
     }
 
     @Override
-    public User find(String username) throws SQLException {
-        String qr = "SELECT * FROM user WHERE username=?";
+    public User find(int id) throws SQLException {
+        String qr = "SELECT * FROM user WHERE id=?";
         PreparedStatement stmt = dataSource.getConnection().prepareStatement(qr);
-        stmt.setString(1,username);
+        stmt.setInt(1, id);
 
         ResultSet res = stmt.executeQuery();
 
-        while(res.next()){
-            User user = new User(res.getString("username"),res.getString("password"));
+        while (res.next()) {
+            User user = new User(res.getString("username"), res.getString("password"));
             return user;
         }
         return null;
     }
 
     @Override
+    public boolean Validate(User user) throws SQLException {
+        String qr = "SELECT * FROM user WHERE username=? AND password=?";
+        PreparedStatement stmt = dataSource.getConnection().prepareStatement(qr);
+        stmt.setString(1, user.getUsername());
+        stmt.setString(2, user.getPassword());
+
+        ResultSet res = stmt.executeQuery();
+        if(!res.next()){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
+    @Override
     public void remove(int id) throws SQLException {
         String qr = "DELETE FROM user WHERE id=?";
         PreparedStatement stmt = dataSource.getConnection().prepareStatement(qr);
-        stmt.setInt(1,id);
+        stmt.setInt(1, id);
         stmt.executeUpdate();
 
     }
@@ -74,8 +90,8 @@ public class RegisterDaoMem implements RegisterDao {
         String qr = "SELECT * FROM user";
         PreparedStatement stmt = dataSource.getConnection().prepareStatement(qr);
         ResultSet res = stmt.executeQuery();
-        while(res.next()){
-            User user = new User(res.getString("username"),res.getString("password"));
+        while (res.next()) {
+            User user = new User(res.getString("username"), res.getString("password"));
             allUsers.add(user);
         }
 

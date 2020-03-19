@@ -36,7 +36,6 @@ public class Connection {
         dataSource.setUser("evelin");
         dataSource.setPassword("95Marcius");
 
-
         dataSource.getConnection().close();
 
         return dataSource;

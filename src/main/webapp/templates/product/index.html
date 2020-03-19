@@ -39,6 +39,7 @@
 <div class="wrapper">
     <!-- Sidebar -->
     <nav id="sidebar">
+        <span th:if="${session.isEmpty() == true}">
         <div class="sidebar-header">
             <h3>Navigation</h3>
             <a data-toggle="collapse" href="#login" role="button"
@@ -88,6 +89,19 @@
                 </div>
             </div>
         </div>
+        </span>
+        <span th:unless="${session.isEmpty() == true}">
+                <div>
+                    <p>Logged in as</p>
+                    <p th:text="${session.get('username')} ">username</p>
+                </div>
+                <div class="card card-body nav-card-body">
+                    <form class="login-form" action="/logout" method="get">
+                        <input class="login-submit" type="submit" value="Logout">
+                    </form>
+                </div>
+
+        </span>
         <div class="alert alert-success" role="alert" th:if="${isValid == 'true'}">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>

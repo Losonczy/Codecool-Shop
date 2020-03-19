@@ -14,16 +14,18 @@ import org.thymeleaf.context.WebContext;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.SQLException;
 
-@WebServlet(urlPatterns = {"/login"})
-public class Login extends HttpServlet {
+@WebServlet(urlPatterns = {"/logout"})
+public class Logout extends HttpServlet {
 
     @Override
-    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
@@ -40,31 +42,10 @@ public class Login extends HttpServlet {
 
         RegisterDao registration = RegisterDaoMem.getINSTANCE();
 
-        String username = req.getParameter("username");
-        String password = req.getParameter("password");
-
-        PasswordHashing demo = new PasswordHashing();
-
         HttpSession session = req.getSession();
+        session.invalidate();
+        System.out.println("Unsuccessful login");
 
-
-        try {
-            if(demo.login(username,password)){
-                context.setVariable("isLogin", "true");
-                session.setAttribute("username",username);
-
-                System.out.println("session name: "+session.getAttribute("username"));
-                System.out.println("Successful login");
-            }
-            else{
-                context.setVariable("isLogin", "false");
-                System.out.println("Unsuccessful login");
-                session.invalidate();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        engine.process("product/index.html", context, resp.getWriter());
-    }
+    engine.process("product/index.html", context, resp.getWriter());
+}
 }

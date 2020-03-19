@@ -52,6 +52,7 @@ public class RegisterDaoMem implements RegisterDao {
         while (res.next()) {
             User user = new User(res.getString("username"), res.getString("password"));
             user.setId(res.getInt("id"));
+
             return user;
         }
         return null;

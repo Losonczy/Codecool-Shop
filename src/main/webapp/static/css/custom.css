@@ -306,6 +306,10 @@ h1 {
     color: #65c697;
     text-transform: capitalize;
 }
+.logged-in span:hover{
+    cursor: pointer;
+    color: #0FB0BB;
+}
 
 #delete{
 

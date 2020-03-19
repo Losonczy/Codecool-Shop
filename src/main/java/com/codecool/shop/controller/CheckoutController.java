@@ -55,8 +55,13 @@ public class CheckoutController extends HttpServlet {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
         HttpSession session = req.getSession();
+        String username;
+        if(session.getAttribute("username") != null){
+            username = String.valueOf(session.getAttribute("username"));
+        }else{
+            username = "admin";
+        }
 
-        String username = String.valueOf(session.getAttribute("username"));
         User user = null;
         try {
             user = register.find(username);

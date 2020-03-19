@@ -467,6 +467,29 @@ h1 {
 
 }
 
+.count{
+    display: inline-block;
+    vertical-align: center;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 20px;
+    max-width: 35px !important;
+    border: none;
+    text-align: center;
+    padding: 0 2px;
+
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
 .qty .plus {
     cursor: pointer;
     display: inline-block;

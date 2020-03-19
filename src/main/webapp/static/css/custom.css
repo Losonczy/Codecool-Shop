@@ -287,8 +287,30 @@ h1 {
 }
 .delete-header{
     /*background-color: white !important;*/
-    max-width: 0;
+    max-width: 150px;
 }
+.logged-in{
+    margin: 10px auto;
+    font-size: 20px;
+    background-color: #4a4a4a;
+    padding: 10px;
+    border-radius: 20px;
+    width: 90%;
+
+}
+.logged-in p{
+    margin:0;
+}
+.logged-in span{
+    font-weight: bold;
+    color: #65c697;
+    text-transform: capitalize;
+}
+.logged-in span:hover{
+    cursor: pointer;
+    color: #0FB0BB;
+}
+
 #delete{
 
     display: flex;
@@ -296,6 +318,7 @@ h1 {
     justify-content:center;
     align-content: center;
     align-items: center;
+    max-width: 100px;
 }
 #delete img{
 
@@ -465,6 +488,29 @@ h1 {
     min-width: 35px;
     text-align: center;
 
+}
+
+.count{
+    display: inline-block;
+    vertical-align: center;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 20px;
+    max-width: 35px !important;
+    border: none;
+    text-align: center;
+    padding: 0 2px;
+
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
 }
 
 .qty .plus {

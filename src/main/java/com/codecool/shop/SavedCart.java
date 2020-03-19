@@ -1,5 +1,6 @@
 package com.codecool.shop;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -7,7 +8,7 @@ public class SavedCart {
     private int id;
     private int user_id;
     private String productListData;
-    private List<Integer> productList;
+    private List<String> productList;
     private int totalCost;
     private Date dateOfPurchase;
 
@@ -17,5 +18,7 @@ public class SavedCart {
         this.productListData = productListData;
         this.totalCost = totalCost;
         this.dateOfPurchase = dateOfPurchase;
+        productList = Arrays.asList(productListData.split(","));
     }
+    
 }

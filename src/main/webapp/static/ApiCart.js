@@ -1,5 +1,6 @@
 let totalCost = 0;
 
+
 function addItemToCart() {
     let itemToCart = document.querySelectorAll(".toggle-button");
 
@@ -40,6 +41,7 @@ function getCartItems() {
         getData("/apiGetCartData", loadCartData);
 
     });
+
 }
 
 function getData(url, callback) {
@@ -58,7 +60,6 @@ function loadCartData(cartItems) {
     const checkOut = document.getElementById('checkout');
     checkOut.disabled = cartItems.length == 0;
 
-
     for (let i = 0; i < cartItems.length; i++) {
         totalCost += cartItems[i]['defaultPrice'] * cartItems[i]['quantity'];
         displayCartData(cartItems[i]);
@@ -74,7 +75,7 @@ function displayCartData(item) {
 
     const template = document.querySelector('#cart-template');
     const clone = document.importNode(template.content, true);
-    const row  = clone.querySelector('.cart-row');
+    const row = clone.querySelector('.cart-row');
     row.setAttribute('id', `body_${item['id']}`);
     const name = clone.querySelector('#name');
     const price = clone.querySelector('#price');
@@ -103,17 +104,18 @@ function displayCartData(item) {
     deleteItem(item);
 
 }
-function deleteItem(item){
+
+function deleteItem(item) {
 
     const body = document.querySelector('#container');
     const totalCostCounter = document.querySelector('.total-cost-number');
     const emptyP = document.querySelector('#empty');
     const header = document.querySelector('.row-header');
-    const delete_button= document.getElementById(`delete_${item['id']}`);
+    const delete_button = document.getElementById(`delete_${item['id']}`);
     const itemContainer = document.getElementById(`body_${item['id']}`);
     const totalCostContainer = document.querySelector('.total-cost');
 
-    delete_button.addEventListener('click',function () {
+    delete_button.addEventListener('click', function () {
         let result = confirm("Are you sure you want to delete?");
         if (result) {
             itemContainer.remove();
@@ -125,8 +127,8 @@ function deleteItem(item){
                 .then((data) => {
                     console.log(data);
                 });
-            const row  = document.querySelectorAll('.cart-row');
-            if(row.length == 0){
+            const row = document.querySelectorAll('.cart-row');
+            if (row.length == 0) {
                 emptyP.textContent = "The cart is empty";
                 header.style.display = "none";
                 totalCostContainer.style.display = "none";
@@ -148,7 +150,7 @@ function quantityCounter(item) {
     plus.addEventListener('click', function () {
         if (item['quantity'] <= item['amount'] && item["quantity"] >= 1) {
             item['quantity'] += 1;
-            price.textContent = item["defaultPrice"]*item['quantity'] + " USD";
+            price.textContent = item["defaultPrice"] * item['quantity'] + " USD";
             totalCost += item["defaultPrice"]
             totalCostCounter.innerText = totalCost;
 
@@ -170,7 +172,7 @@ function quantityCounter(item) {
         if (item["quantity"] > 1 && item['quantity'] <= item['amount'] + 1) {
             item['quantity'] -= 1;
             if (item["quantity"] >= 1) {
-                price.textContent = item["defaultPrice"]*item['quantity'] + " USD";
+                price.textContent = item["defaultPrice"] * item['quantity'] + " USD";
                 totalCost -= item["defaultPrice"];
                 totalCostCounter.innerText = totalCost;
             }

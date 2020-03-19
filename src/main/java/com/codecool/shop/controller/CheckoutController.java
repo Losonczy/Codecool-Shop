@@ -1,11 +1,13 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.Cart;
+import com.codecool.shop.User;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.config.TemplateEngineUtil;
+import com.codecool.shop.dao.implementation.RegisterDaoMem;
 import com.codecool.shop.model.Product;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -49,8 +51,19 @@ public class CheckoutController extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //req.getReader().lines().collect(Collectors.joining());
+        RegisterDaoMem register = RegisterDaoMem.getINSTANCE();
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
+        HttpSession session = req.getSession();
+
+        String username = String.valueOf(session.getAttribute("username"));
+        User user = null;
+        try {
+            user = register.find(username);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        int user_id = user.getId();
 
 
         String fullname = req.getParameter("fullname");
@@ -69,11 +82,13 @@ public class CheckoutController extends HttpServlet {
 
 
         ArrayList<String> personal_data = new ArrayList<>();
+        personal_data.add(String.valueOf(user_id));
         personal_data.add(fullname);
         personal_data.add(email);
         personal_data.add(address);
         personal_data.add(city);
         personal_data.add(zip);
+
 
         try {
             CheckoutDaoMem.getInstance().add(personal_data);
@@ -92,6 +107,7 @@ public class CheckoutController extends HttpServlet {
 
             }
         }
+        items.add(String.valueOf(user.getId()));
         items.add(purchasedItems);
         items.add(String.valueOf(cart.getCostOfCart()));
 

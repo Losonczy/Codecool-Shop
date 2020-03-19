@@ -5,6 +5,7 @@ import com.codecool.shop.User;
 import com.codecool.shop.dao.RegisterDao;
 
 import javax.sql.DataSource;
+import java.nio.charset.StandardCharsets;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,6 +15,7 @@ import java.util.List;
 public class RegisterDaoMem implements RegisterDao {
     private DataSource dataSource;
     private static RegisterDaoMem INSTANCE = null;
+    ProductCategoryDaoMem product = ProductCategoryDaoMem.getInstance();
 
     private RegisterDaoMem() {
 
@@ -57,24 +59,26 @@ public class RegisterDaoMem implements RegisterDao {
         }
         return null;
     }
-    public User getUserData(String username) throws SQLException{
-        String qr="SELECT users.id,username,email,full_name,address,city,zip FROM users" +
-                "LEFT JOIN personal_data pd on users.id = pd.user_id" +
-                "WHERE username=?";
+
+    public User getUserData(String username) throws SQLException {
+        String qr = "SELECT users.id,users.username,pd.email,pd.full_name,pd.address,pd.city,pd.zip FROM users LEFT JOIN personal_data pd on users.id = pd.user_id WHERE username=?";
 
         PreparedStatement stmt = dataSource.getConnection().prepareStatement(qr);
         stmt.setString(1, username);
         ResultSet res = stmt.executeQuery();
 
         while (res.next()) {
-            User user = new User(res.getInt("id"), res.getString("username"), res.getString("email"), res.getString("full_name"), res.getString("password"), res.getInt("zip"), res.getString("adress"), res.getString("city"));
+            User user = new User(res.getInt("id"), res.getString("username"), res.getString("email"), res.getString("full_name"), res.getInt("zip"), res.getString("address"), res.getString("city"));
+
+            System.out.println(res.getInt("id") + res.getString("username") + res.getString("email") + res.getString("full_name") + res.getInt("zip") + res.getString("address") + res.getString("city"));
             return user;
         }
         return null;
     }
-    public List<SavedCart> getCartByUser(String username) throws SQLException{
 
-        String qr="SELECT users.id, c.id, product_list,total_cost,date_of_purchase FROM users\n" +
+    public List<SavedCart> getCartByUser(String username) throws SQLException {
+
+        String qr = "SELECT users.id as user_id, c.id as cart_id, product_list,total_cost,date_of_purchase FROM users\n" +
                 "        LEFT JOIN cart c on users.id = c.user_id\n" +
                 "        WHERE username=?";
 
@@ -82,13 +86,24 @@ public class RegisterDaoMem implements RegisterDao {
         stmt.setString(1, username);
         ResultSet res = stmt.executeQuery();
 
-        List<SavedCart> savedCartList=new ArrayList<>();
+        List<SavedCart> savedCartList = new ArrayList<>();
 
         while (res.next()) {
-            savedCartList.add(new SavedCart(res.getInt("c.id"), res.getInt("users.id"), res.getString("product_list"), res.getInt("total_cost"), res.getDate("date_of_purchase")));
-            return savedCartList;
+            SavedCart cart = new SavedCart(res.getInt("cart_id"), res.getInt("user_id"), res.getString("product_list"), res.getInt("total_cost"), res.getDate("date_of_purchase"));
+            savedCartList.add(cart);
+
+//            List<String> products = new ArrayList<>();
+//            for(String i: cart.getProductList()){
+//                products.add(product.find(Integer.parseInt(i)).getName());
+//            }
+//            for(String pro: products){
+//                System.out.println(pro);
+//            }
+////            cart.setProductList(products);
         }
-        return null;
+      
+        return savedCartList;
+
 
     }
 

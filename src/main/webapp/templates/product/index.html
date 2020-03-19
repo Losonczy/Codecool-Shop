@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8"/>
+    <META http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <meta name="author" content="Codecool"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
@@ -92,7 +92,8 @@
         </span>
         <span th:unless="${session.isEmpty() == true}">
                 <div class="logged-in">
-                    <p>Welcome, <span data-toggle="modal" data-target="#userModal" th:text="${session.get('username')} ">username</span></p>
+                    <p>Welcome, <span data-toggle="modal" data-target="#userModal"
+                                      th:text="${session.get('username')} ">username</span></p>
 
                 </div>
                 <div class="card card-body nav-card-body">
@@ -114,8 +115,6 @@
             </button>
             Username or e-mail address already in use!
         </div>
-
-
 
 
         <div class="sidebar-header">
@@ -235,7 +234,7 @@
     </div>
     <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModal"
          aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog user-modal modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="userModalLabel">User data</h5>
@@ -244,50 +243,70 @@
                     </button>
                 </div>
                 <div class="modal-body">
-<!--                    //Tartalom-->
+                    <div th:each="userData,iterStat : ${actualUser}">
+                        <p>Personal data of user <span class="user-header" th:text="${userData.getUsername()}"></span> !</p></div>
+                    <div th:each="userData,iterStat : ${actualUser}">
+                        <div class="user-data" th:if="${userData.getEmail()} != null">
+
+                            <p th:text="${userData.getEmail()}"></p>
+                            <p th:text="${userData.getAddress()}"></p>
+                            <p th:text="${userData.getCity()}"></p>
+                            <p th:text="${userData.getZip()}"></p>
+                        </div>
+                        <span class="no-orders" th:unless="${userData.getEmail()} != null">You don't have any orders yet!</span>
+
+                        <div th:each="data,iterStat : ${cartData}">
+                            <div class="user-data" th:if="${userData.getEmail()} != null">
+                                <div class="user-product-list" th:each="product,iterStat : ${data.getProductList()}">
+                                    <p th:text="${product}"></p>
+                                </div>
+                                <!--                            <p th:text="${data.getProductList()}"></p>-->
+                                <p>Total cost of purchase: <span th:text="${data.getTotalCost()}"></span></p>
+                                <p>Date of purchase: <span th:text="${data.getDateOfPurchase()}"></span></p>
+                            </div>
+
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-
-</div>
-<template id="cart-template">
-
-    <div class="row cart-row">
-        <div class="col-sm" id="name">
 
         </div>
+        <template id="cart-template">
 
-        <div class="col-sm" id="quantity">
+            <div class="row cart-row">
+                <div class="col-sm" id="name">
 
-            <div class="qty mt-5">
-                <span class="minus">-</span>
-                <input type="number" class="count" name="qty" value="0">
-                <span class="plus">+</span>
+                </div>
+
+                <div class="col-sm" id="quantity">
+
+                    <div class="qty mt-5">
+                        <span class="minus">-</span>
+                        <input type="number" class="count" name="qty" value="0">
+                        <span class="plus">+</span>
+                    </div>
+                </div>
+
+                <div class="col-sm" id="price">
+
+                </div>
+                <div class="col-sm" id="delete">
+                    <img src="/static/img/trash.png" id="delete-img" alt="delete">
+                </div>
             </div>
-        </div>
+        </template>
+        <script>
+            $(document).ready(function () {
 
-        <div class="col-sm" id="price">
+                $('#sidebarCollapse').on('click', function () {
+                    $('#sidebar').toggleClass('active');
+                });
 
-        </div>
-        <div class="col-sm" id="delete">
-            <img src="/static/img/trash.png" id="delete-img" alt="delete">
-        </div>
-    </div>
-</template>
-<script>
-    $(document).ready(function () {
-
-        $('#sidebarCollapse').on('click', function () {
-            $('#sidebar').toggleClass('active');
-        });
-
-    });
-</script>
+            });
+        </script>
 </body>
 </html>

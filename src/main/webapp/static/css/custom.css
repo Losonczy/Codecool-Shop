@@ -329,6 +329,44 @@ h1 {
     transform: scale(1.5);
 }
 
+.no-orders{
+    background-color: #FFF0A8;
+    padding:20px;
+    color:#404040;
+    font-weight: bold;
+    margin: 50px !important;
+}
+.user-header{
+    text-transform: capitalize;
+    font-size: 20px;
+    color:#1e6377;
+    text-align: center;
+}
+.personal-data-header{
+    background-color: #FFF0A8;
+    padding: 7px;
+    margin: 10px auto;
+    max-width: 50%;
+}
+.user-data{
+    border: 1px solid #ccc;
+    padding:20px;
+    margin: 10px auto;
+    max-width: 50%;
+
+}
+.user-data p{
+    text-align: left;
+}
+.user-product-list span{
+    margin:0;
+    text-align: left;
+}
+.modal-dialog .user-modal{
+    max-width: 300px !important;
+    min-width: 300px !important;
+}
+
 .total-cost{
     display: none;
     justify-content:right;

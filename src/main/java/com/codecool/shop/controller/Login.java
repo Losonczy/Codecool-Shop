@@ -1,6 +1,8 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.Cart;
+import com.codecool.shop.SavedCart;
+import com.codecool.shop.User;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
@@ -18,6 +20,7 @@ import javax.servlet.http.*;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.List;
 
 @WebServlet(urlPatterns = {"/login"})
 public class Login extends HttpServlet {
@@ -61,6 +64,20 @@ public class Login extends HttpServlet {
                 System.out.println("Unsuccessful login");
                 session.invalidate();
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            User actualUser = registration.getUserData(username);
+            try{
+                List<SavedCart> cartData = registration.getCartByUser(username);
+                context.setVariable("cartData", cartData);
+            }catch(NullPointerException ex){
+                context.setVariable("cartData", "No orders yet!");
+            }
+            context.setVariable("actualUser", actualUser);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -7,6 +7,7 @@ public class User {
 
 
     private String email;
+    private String full_name;
     private String password;
 
     private int zip;
@@ -16,6 +17,17 @@ public class User {
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public User(int id, String username, String email, String full_name, String password, int zip, String address, String city) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.full_name = full_name;
+        this.password = password;
+        this.zip = zip;
+        this.address = address;
+        this.city = city;
     }
 
     public String getUsername() {

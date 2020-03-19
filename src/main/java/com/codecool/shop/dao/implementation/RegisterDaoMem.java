@@ -1,5 +1,6 @@
 package com.codecool.shop.dao.implementation;
 
+import com.codecool.shop.SavedCart;
 import com.codecool.shop.User;
 import com.codecool.shop.dao.RegisterDao;
 
@@ -38,7 +39,6 @@ public class RegisterDaoMem implements RegisterDao {
         stmt.setString(2, user.getPassword());
         stmt.executeUpdate();
 
-
     }
 
     @Override
@@ -57,6 +57,40 @@ public class RegisterDaoMem implements RegisterDao {
         }
         return null;
     }
+    public User getUserData(String username) throws SQLException{
+        String qr="SELECT users.id,username,email,full_name,address,city,zip FROM users" +
+                "LEFT JOIN personal_data pd on users.id = pd.user_id" +
+                "WHERE username=?";
+
+        PreparedStatement stmt = dataSource.getConnection().prepareStatement(qr);
+        stmt.setString(1, username);
+        ResultSet res = stmt.executeQuery();
+
+        while (res.next()) {
+            User user = new User(res.getInt("id"), res.getString("username"), res.getString("email"), res.getString("full_name"), res.getString("password"), res.getInt("zip"), res.getString("adress"), res.getString("city"));
+            return user;
+        }
+        return null;
+    }
+    public List<SavedCart> getCartByUser(String username) throws SQLException{
+
+        String qr="SELECT users.id, c.id, product_list,total_cost,date_of_purchase FROM users\n" +
+                "        LEFT JOIN cart c on users.id = c.user_id\n" +
+                "        WHERE username=?";
+
+        PreparedStatement stmt = dataSource.getConnection().prepareStatement(qr);
+        stmt.setString(1, username);
+        ResultSet res = stmt.executeQuery();
+
+        List<SavedCart> savedCartList=new ArrayList<>();
+
+        while (res.next()) {
+            savedCartList.add(new SavedCart(res.getInt("c.id"), res.getInt("users.id"), res.getString("product_list"), res.getInt("total_cost"), res.getDate("date_of_purchase")));
+            return savedCartList;
+        }
+        return null;
+
+    }
 
     @Override
     public boolean Validate(User user) throws SQLException {
@@ -68,8 +102,6 @@ public class RegisterDaoMem implements RegisterDao {
 
         ResultSet res = stmt.executeQuery();
         return res.next();
-
-
 
     }
 

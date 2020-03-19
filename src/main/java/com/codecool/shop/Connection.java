@@ -36,7 +36,6 @@ public class Connection {
         dataSource.setUser("barna");
         dataSource.setPassword("Linoleum69");
 
-
         dataSource.getConnection().close();
 
         return dataSource;

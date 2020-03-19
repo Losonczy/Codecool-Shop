@@ -91,9 +91,9 @@
         </div>
         </span>
         <span th:unless="${session.isEmpty() == true}">
-                <div>
-                    <p>Logged in as</p>
-                    <p th:text="${session.get('username')} ">username</p>
+                <div class="logged-in">
+                    <p>Welcome, <span th:text="${session.get('username')} ">username</span></p>
+
                 </div>
                 <div class="card card-body nav-card-body">
                     <form class="login-form" action="/logout" method="get">
@@ -211,7 +211,7 @@
                                 <p>Name</p>
                                 <p>Quantity</p>
                                 <p>Price</p>
-                                <p>Delete</p>
+                                <p class="delete-header">Delete</p>
                             </div>
                         </div>
                         <p id="empty">The cart is empty</p>

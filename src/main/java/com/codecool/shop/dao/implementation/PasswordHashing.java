@@ -33,8 +33,7 @@ public class PasswordHashing {
 
         try {
             String storedPasswordHash = registration.find(username).getPassword();
-            System.out.println(hashedPassword);
-            System.out.println(storedPasswordHash);
+ 
             if (hashedPassword.equals(storedPasswordHash)) {
                 isAuthenticated = true;
             } else {

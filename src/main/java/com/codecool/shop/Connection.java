@@ -32,9 +32,10 @@ public class Connection {
     private DataSource connect() throws SQLException {
         PGSimpleDataSource dataSource = new PGSimpleDataSource();
 
-        dataSource.setDatabaseName("webshop");
-        dataSource.setUser("evelin");
-        dataSource.setPassword("95Marcius");
+        dataSource.setServerName("ec2-52-87-135-240.compute-1.amazonaws.com");
+        dataSource.setDatabaseName("d5ij0761tv0sti");
+        dataSource.setUser("lpbvggrhcdpjtk");
+        dataSource.setPassword("e47973e06ea0f1f9eb915ff42d66ad93889f678b9a1e0eaeef07b205dc07fe5b");
 
         dataSource.getConnection().close();
 

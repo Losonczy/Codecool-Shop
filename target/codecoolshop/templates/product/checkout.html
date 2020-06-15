@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="author" content="Codecool"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <title>Checkout</title>
+
+    <!-- Bootstrap components -->
+    <!-- Latest compiled and minified Jquery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+    <!--Latest compiled and minified Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!-- End of Bootstrap components -->
+    <script src="/static/js/main.js" defer></script>
+    <!--    <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>-->
+
+    <!--    <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>-->
+    <link rel="stylesheet" type="text/css" href="/static/css/checkout.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="/static/js/checkout.js" defer></script>
+</head>
+<body>
+<div id="content">
+    <div class="main-wrapper">
+        <h1>Checkout Page</h1>
+        <div class="row">
+            <div class="col-75">
+                <div class="container">
+                    <form action="/checkout" method="post" name="checkout">
+
+                        <div class="row">
+                            <div class="col-50">
+                                <h3>Shipping Address</h3>
+                                <label for="fname"><i class="fa fa-user"></i> Full Name</label>
+                                <input type="text" id="fname" name="fullname" minlength="5" placeholder="John M. Doe"
+                                       required>
+                                <label for="email"><i class="fa fa-envelope"></i> Email</label>
+                                <input type="text" id="email" name="email" placeholder="john@example.com" required>
+                                <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
+                                <input type="text" id="adr" name="address" placeholder="542 W. 15th Street" required>
+                                <label for="city"><i class="fa fa-institution"></i> City</label>
+                                <input type="text" id="city" name="city" placeholder="New York" required>
+
+                                <div class="row">
+                                    <div class="col-50">
+                                        <label for="state">State</label>
+                                        <input type="text" id="state" name="state" placeholder="NY" required>
+                                    </div>
+                                    <div class="col-50">
+                                        <label for="zip">Zip</label>
+                                        <input type="text" id="zip" name="zip" placeholder="10001" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <label>
+                            <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
+                        </label>
+                        <div id="paypal-button-container">
+                            <a class="payment-btn"
+                               href="https://www.paypal.com/hu/signin"
+                               target="_blank">
+                                <span class="paypal-button">
+                                    <span class="paypal-logo">
+                                        <i>Pay</i><i>Pal</i>
+                                    </span>
+                                </span>
+                            </a>
+                        </div>
+                        <input id="confirm" type="submit" value="Continue to checkout" class="btn" name="submit"
+                               disabled>
+                    </form>
+                    <a href="/">
+                        <button class="back">Back to shopping</button>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-25">
+                <div class="container">
+                    <h3>Cart
+                        <span class="price" style="color:black">
+          <i class="fa fa-shopping-cart" th:text="'     '+${quantityOfItems}"></i>
+        </span>
+                    </h3>
+                    <div id="itemsInCart" class="row">
+                        <div th:each="prod,iterStat : ${itemsInCart.keySet()}">
+                            <div class="items" th:attr="data-label=${prod.getName()}">
+                                <p>
+                                <div class="quantity" th:text="'Quantity:    '+${itemsInCart.get(prod)}"></div>
+                                <img class="cart-img" src="http://placehold.it/300x300/000/fff"
+                                     th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt=""
+                                     style="width: 40%"/>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="cost-container">Total <span class="price" style="color:black"
+                                                      th:text="${costOfCart}+' $'"></span></p>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

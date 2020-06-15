@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <META http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="author" content="Codecool"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <title>Codecool Shop</title>
+
+    <!-- Bootstrap components -->
+    <!-- Latest compiled and minified Jquery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+    <!--Latest compiled and minified Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!-- End of Bootstrap components -->
+    <script src="/static/js/main.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
+    <link rel="stylesheet" href="/static/css/snackbar.css"/>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
+    <script src="/static/ApiCart.js" defer></script>
+</head>
+
+<body>
+
+<div class="wrapper">
+    <!-- Sidebar -->
+    <nav id="sidebar">
+        <span th:if="${session.isEmpty() == true}">
+        <div class="sidebar-header">
+            <h3>Navigation</h3>
+            <a data-toggle="collapse" href="#login" role="button"
+               aria-expanded="false" aria-controls="collapseExample">
+                <button class="registration">Log in</button>
+            </a>
+            <div class="collapse" id="login">
+
+                <div class="card card-body nav-card-body">
+                    <form class="login-form" action="/login" method="post">
+                        <input class="login" type="text" id="username" name="username" placeholder="Username" required
+                               minlength="5" autocomplete="off"><br>
+                        <input class="login" type="password" id="password" name="password" placeholder="Password"
+                               required
+                               minlength="5"><br><br>
+                        <input class="login-submit" type="submit" value="Submit">
+                    </form>
+                </div>
+            </div>
+            <div class="alert alert-success" role="alert" th:if="${isLogin == 'true'}">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                Successful Login!
+            </div>
+            <div class="alert alert-danger" role="alert" th:if="${isLogin == 'false'}">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                Wrong username or password!
+            </div>
+            <a data-toggle="collapse" href="#registration" role="button"
+               aria-expanded="false" aria-controls="collapseExample">
+                <button class="registration">Registration</button>
+            </a>
+            <div class="collapse" id="registration">
+                <div class="card card-body nav-card-body">
+                    <form class="login-form" action="/registration" method="post">
+                        <input class="login" type="text" id="uname" name="uname" placeholder="Username" required
+                               minlength="5" autocomplete="off"><br>
+                        <input class="login" type="password" id="pword" name="pword" placeholder="Password"
+                               required minlength="5"><br>
+                        <input class="login" type="email" id="email" name="email" placeholder="E-mail"
+                               required minlength="7"><br><br>
+                        <input class="login-submit" type="submit" value="Submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+        </span>
+        <span th:unless="${session.isEmpty() == true}">
+                <div class="logged-in">
+                    <p>Welcome, <span data-toggle="modal" data-target="#userModal"
+                                      th:text="${session.get('username')} ">username</span></p>
+
+                </div>
+                <div class="card card-body nav-card-body">
+                    <form class="login-form" action="/logout" method="get">
+                        <input class="login-submit" id="logout" type="submit" value="Logout">
+                    </form>
+                </div>
+
+        </span>
+        <div class="alert alert-success" role="alert" th:if="${isValid == 'true'}">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            Successful Registration
+        </div>
+        <div class="alert alert-danger" role="alert" th:if="${isValid == 'false'}">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            Username or e-mail address already in use!
+        </div>
+
+
+        <div class="sidebar-header">
+            <h3>Categories</h3>
+        </div>
+
+
+        <ul class="list-unstyled components">
+            <li>
+                <a class="category focus" data-switch="1" id="default">Show All</a>
+            </li>
+            <li>
+                <a class="category" data-switch="1">Animal</a>
+            </li>
+            <li>
+                <a class="category" data-switch="1">Holiday</a>
+            </li>
+            <li>
+                <a class="category" data-switch="1">Cartoon</a>
+            </li>
+            <li>
+                <a class="category" data-switch="1">Other</a>
+            </li>
+
+        </ul>
+    </nav>
+    <div id="content">
+        <div class="header">
+            <nav class="navbar navbar-expand-lg">
+
+                <button type="button" id="sidebarCollapse">
+                    <span><img src="/static/img/hamburger.png" alt=""></span>
+                </button>
+            </nav>
+            <h1>Cool Stones Webshop</h1>
+            <img id="cart-button" src="/static/img/cart.svg" alt="" data-toggle="modal" data-target="#exampleModal">
+
+
+        </div>
+
+
+        <div class="container-fluid">
+
+            <div class="main-wrapper">
+
+                <!--                CONTENT START-->
+                <div id="products" class="row">
+                    <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
+                        <div class="card" th:attr="data-label=${prod.getProductCategory().name}">
+                            <img src="http://placehold.it/300x300/000/fff"
+                                 th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt=""/>
+                            <div class="card-header">
+                                <strong th:text="${prod.getProductCategory().name}">Category Title</strong>
+                                <h4 class="card-title" th:text="${prod.name}">Product name</h4>
+                                <p class="card-text" th:text="${prod.description}">Product description... </p>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-text">
+                                    <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
+                                </div>
+                                <div class="card-text">
+                                    <a class="toggle-button" th:attr="id=${prod.getId()}">Add to cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div id="snackbar">Successfully added to cart!</div>
+    </div>
+
+    <!-- Button trigger modal -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Cool Stone Cart</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span class="modal-close" aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="cart-body">
+
+                        <div class="row-header">
+                            <div class="cart-header">
+                                <p>Name</p>
+                                <p>Quantity</p>
+                                <p>Price</p>
+                                <p class="delete-header">Delete</p>
+                            </div>
+                        </div>
+                        <p id="empty">The cart is empty</p>
+                        <div id="container">
+
+                        </div>
+                        <div class="total-cost">
+                            <p>Total cost: <span class="total-cost-number"></span> USD</p>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <a href="/checkout">
+                            <button type="button" class="btn btn-secondary" id="checkout">Checkout</button>
+                        </a>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModal"
+         aria-hidden="true">
+        <div class="modal-dialog user-modal modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="userModalLabel">User data</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span class="modal-close" aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div th:each="userData,iterStat : ${actualUser}">
+                        <p>Personal data of user <span class="user-header" th:text="${userData.getUsername()}"></span> !</p></div>
+                    <div th:each="userData,iterStat : ${actualUser}">
+                        <div class="user-data" th:if="${userData.getEmail()} != null">
+
+                            <p th:text="${userData.getEmail()}"></p>
+                            <p th:text="${userData.getAddress()}"></p>
+                            <p th:text="${userData.getCity()}"></p>
+                            <p th:text="${userData.getZip()}"></p>
+                        </div>
+                        <span class="no-orders" th:unless="${userData.getEmail()} != null">You don't have any orders yet!</span>
+
+                        <div th:each="data,iterStat : ${cartData}">
+                            <div class="user-data" th:if="${userData.getEmail()} != null">
+                                <div class="user-product-list" th:each="product,iterStat : ${data.getProductList()}">
+                                    <p th:text="${product}"></p>
+                                </div>
+                                <!--                            <p th:text="${data.getProductList()}"></p>-->
+                                <p>Total cost of purchase: <span th:text="${data.getTotalCost()}"></span></p>
+                                <p>Date of purchase: <span th:text="${data.getDateOfPurchase()}"></span></p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <template id="cart-template">
+
+            <div class="row cart-row">
+                <div class="col-sm" id="name">
+
+                </div>
+
+                <div class="col-sm" id="quantity">
+
+                    <div class="qty mt-5">
+                        <span class="minus">-</span>
+                        <input type="number" class="count" name="qty" value="0">
+                        <span class="plus">+</span>
+                    </div>
+                </div>
+
+                <div class="col-sm" id="price">
+
+                </div>
+                <div class="col-sm" id="delete">
+                    <img src="/static/img/trash.png" id="delete-img" alt="delete">
+                </div>
+            </div>
+        </template>
+        <script>
+            $(document).ready(function () {
+
+                $('#sidebarCollapse').on('click', function () {
+                    $('#sidebar').toggleClass('active');
+                });
+
+            });
+        </script>
+</body>
+</html>

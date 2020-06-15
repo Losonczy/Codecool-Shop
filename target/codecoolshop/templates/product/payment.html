@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/css/checkout.css">
+</head>
+<body>
+<div class="payment-container">
+    <img class="thanks" src="/static/img/thanks.png" alt="">
+    <p>Dear <span class="name" th:text="${name}"></span>! <br> Thank you for your order</p>
+    <p>We will send you a confirmation e-mail to the <span class="email" th:text="${email}"></span> address in a few minutes.</p>
+    <a href="/"><button class="back">Back to main page</button></a>
+</div>
+
+
+
+</body>
+</html>
+
